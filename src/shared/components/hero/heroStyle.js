@@ -29,6 +29,7 @@ const heroStyle = {
         flexWrap: "wrap" 
     },
     heroInfoContainer:{
+        height:"120px",
         justifyContent: "center",
         alignItems: "center",
         textAlign: "center",
