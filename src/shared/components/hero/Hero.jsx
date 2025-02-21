@@ -38,7 +38,7 @@ const Hero = () => {
             </Row>
             <Row style={heroStyle.heroInfoContainer}>
                 <Col>
-                    We are dedicated to making this Library even better by adding new features and improving existing ones. However, we need your help to make this happen. You can Buy Us A Coffee to help us enhance the website's performance and customer experience. It will allow us to add features that will make your journey with the Library even more enjoyable and productive. Whether you are a frequent user or just stumbled upon our Library, your contribution will make a difference. We are not currently charging any fees for using our Library, but we may introduce premium services and content that require payment in the future.
+                    We are dedicated to making this Library even better by adding new features and improving existing ones. However, we need your help to make this happen. You can Buy Us A Coffee to help us enhance the website's performance and customer experience. It will allow us to add features that will make your journey with the Library even more enjoyable and productive. Whether you are a frequent user or just stumbled upon our Library, your contribution will make a difference. 
                 </Col>
             </Row>
         </Container>
