@@ -1,7 +1,10 @@
 const heroStyle = {
     heroContainer : {
-        boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)", 
-        height: "350px",
+        display: "flex", 
+        flexDirection: "column", 
+        justifyContent: "space-between",
+        alignItems: "center", 
+        height: "450px",
         marginTop: "3rem",
         padding: "10px"
     }, 
@@ -19,8 +22,17 @@ const heroStyle = {
         fontWeight: "bold", 
     },
     heroSearchContainer:{
-        margintBottom: "3px",
-        marginTop: "50px",
+        width: "100%",
+        display: "flex",
+        justifyContent: "space-between", 
+        marginTop: "20px", 
+        flexWrap: "wrap" 
+    },
+    heroInfoContainer:{
+        justifyContent: "center",
+        alignItems: "center",
+        textAlign: "center",
+        boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
     }
 }
 

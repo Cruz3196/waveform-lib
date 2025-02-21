@@ -15,35 +15,30 @@ const Hero = () => {
             <Row style={heroStyle.heroSearchContainer}>
                 <Col>
                     <Form.Select>
-                        <option>Make</option>
-                        <option>Ford</option>
-                        <option>Toyota</option>
-                        <option>Honda</option>
-                    </Form.Select>
-                </Col>
-                <Col>
-                    <Form.Select>
                         <option>Model</option>
-                        <option>Camry</option>
-                        <option>Civic</option>
-                        <option>Mustang</option>
+                        <option>R1S</option>
+                        <option>R1T</option>
                     </Form.Select>
                 </Col>
                 <Col>
                     <Form.Select>
-                        <option>Engine Code</option>
-                        <option>1.8L L4 DOHC</option>
-                        <option>2.0L Turbo</option>
-                        <option>3.5L V6</option>
+                        <option>ECU</option>
                     </Form.Select>
                 </Col>
                 <Col>
                     <Form.Select>
-                        <option>System</option>
-                        <option>Braking</option>
-                        <option>Transmission</option>
-                        <option>Electrical</option>
+                        <option>Signal</option>
                     </Form.Select>
+                </Col>
+                <Col>
+                    <Form.Select>
+                        <option>Waveform</option>
+                    </Form.Select>
+                </Col>
+            </Row>
+            <Row style={heroStyle.heroInfoContainer}>
+                <Col>
+                    We are dedicated to making this Library even better by adding new features and improving existing ones. However, we need your help to make this happen. You can Buy Us A Coffee to help us enhance the website's performance and customer experience. It will allow us to add features that will make your journey with the Library even more enjoyable and productive. Whether you are a frequent user or just stumbled upon our Library, your contribution will make a difference. We are not currently charging any fees for using our Library, but we may introduce premium services and content that require payment in the future.
                 </Col>
             </Row>
         </Container>
