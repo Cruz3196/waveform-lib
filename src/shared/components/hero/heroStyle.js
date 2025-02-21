@@ -29,11 +29,13 @@ const heroStyle = {
         flexWrap: "wrap" 
     },
     heroInfoContainer:{
-        height:"120px",
+        minHeight: "120px",  
+        height: "auto",  
         justifyContent: "center",
         alignItems: "center",
         textAlign: "center",
         boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
+        padding: "30px",
     }
 }
 
