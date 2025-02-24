@@ -11,6 +11,7 @@ const FormModal = ({ modalOpen, handleModalClose }) => {
       </Modal.Header>
       <Modal.Body>
         <form>
+          {/* text file upload for title  */}
           <div className="mb-3">
             <label className="form-label">Title</label>
             <input
@@ -18,6 +19,7 @@ const FormModal = ({ modalOpen, handleModalClose }) => {
               className="form-control"
             />
           </div>
+          {/* text file for desciption  */}
           <div className="mb-3">
             <label className="form-label">Description</label>
             <textarea
@@ -25,6 +27,7 @@ const FormModal = ({ modalOpen, handleModalClose }) => {
               rows="3"
             ></textarea>
           </div>
+          {/* upload image  */}
           <div className="mb-3">
             <label className="form-label">Upload File</label>
             <input type="file" className="form-control"/>
@@ -37,6 +40,7 @@ const FormModal = ({ modalOpen, handleModalClose }) => {
               Close
             </Button>
           </div>
+          
         </form>
       </Modal.Body>
     </Modal>
