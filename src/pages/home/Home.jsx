@@ -1,10 +1,11 @@
 import React from 'react';
-import { Hero } from '../../shared';
+import { Hero, Cards } from '../../shared';
 
 const Home = () => {
   return (
     <>
         <Hero/>
+        <Cards/>
     </>
   )
 }
