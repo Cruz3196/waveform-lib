@@ -1,27 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { db } from '../../../features/apis/firebase/firebase.config';
-import { collection, onSnapshot } from 'firebase/firestore';
+import React from 'react';
 import { Card } from 'react-bootstrap';
+import { useImageContext } from '../ImageContext/ImageContext';
 
 const Cards = () => {
-  const [items, setItems] = useState([]);
-
-  useEffect(() => {
-    const unsubscribe = onSnapshot(collection(db, 'uploads'), (snapshot) => {
-      setItems(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
-    });
-
-    return () => unsubscribe();
-  }, []);
+  const { imageList } = useImageContext(); // Access imageList from context
 
   return (
     <div className="d-flex flex-wrap">
-      {items.map(item => (
-        <Card key={item.id} className="m-2" style={{ width: '18rem' }}>
-          {item.fileURL && <Card.Img variant="top" src={item.fileURL} />}
+      {imageList.map((image, index) => (
+        <Card key={index} className="m-2" style={{ width: '18rem' }}>
+          <Card.Img variant="top" src={image} />
           <Card.Body>
-            <Card.Title>{item.title}</Card.Title>
-            <Card.Text>{item.description}</Card.Text>
+            <Card.Title>Title</Card.Title>
+            <Card.Text>Description</Card.Text>
           </Card.Body>
         </Card>
       ))}
