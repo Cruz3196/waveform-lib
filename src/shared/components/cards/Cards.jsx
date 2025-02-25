@@ -1,18 +1,19 @@
 import React from 'react';
-import { Card } from 'react-bootstrap';
+import { Card, Button } from 'react-bootstrap';
 import { useImageContext } from '../ImageContext/ImageContext';
 
 const Cards = () => {
-  const { imageList } = useImageContext(); // Access imageList from context
+  const { imageList, deleteImage } = useImageContext();
 
   return (
     <div className="d-flex flex-wrap">
-      {imageList.map((image, index) => (
+      {imageList.map((imageURL, index) => (
         <Card key={index} className="m-2" style={{ width: '18rem' }}>
-          <Card.Img variant="top" src={image} />
+          <Card.Img variant="top" src={imageURL} />
           <Card.Body>
-            <Card.Title>Title</Card.Title>
-            <Card.Text>Description</Card.Text>
+            <Button variant="danger" onClick={() => deleteImage(imageURL)}>
+              Delete
+            </Button>
           </Card.Body>
         </Card>
       ))}

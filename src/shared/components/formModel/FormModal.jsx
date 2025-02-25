@@ -12,6 +12,7 @@ const FormModal = ({ modalOpen, handleModalClose }) => {
   const uploadImage = () => {
     if (imgUpload == null) return;
     const imgRef = ref(storage, `images/${imgUpload.name + v4()}`);
+    
     uploadBytes(imgRef, imgUpload).then(() => {
       getDownloadURL(imgRef).then((url) => {
         addImage(url); // Add the image URL to the context
