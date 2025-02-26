@@ -4,8 +4,24 @@ import { storage } from '../../../features/firebase.config';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { v4 } from 'uuid';
 import { useImageContext } from '../ImageContext/ImageContext';
+import { db } from '../../../features/firebase.config';
 
 const FormModal = ({ modalOpen, handleModalClose }) => {
+
+  // state for title and description
+  const [info, setInfo] = useState({
+    title: " ",
+    description: " ",
+  }); 
+
+  const handleChange = (e) => {
+    setInfo({
+      ...info,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+// state for image upload  
   const [imgUpload, setImgUpload] = useState(null);
   const { addImage } = useImageContext(); // Access addImage from context
 
@@ -20,10 +36,14 @@ const FormModal = ({ modalOpen, handleModalClose }) => {
       });
     });
   };
+  
 
+
+// for handling submission for submit button 
   const handleSubmit = (event) => {
     event.preventDefault(); // Prevents the default form submission behavior
     uploadImage(); // Call the image upload function when the form is submitted
+    console.log("Submitted Info:", info);
   };
 
   return (
@@ -35,11 +55,23 @@ const FormModal = ({ modalOpen, handleModalClose }) => {
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
             <label className="form-label">Title</label>
-            <input type="text" className="form-control" />
+            <input 
+              type="text" 
+              className="form-control"
+              name='title' 
+              value={info.title}
+              onChange={handleChange}
+            />
           </div>
           <div className="mb-3">
             <label className="form-label">Description</label>
-            <textarea className="form-control" rows="3"></textarea>
+            <textarea 
+              className="form-control"
+              name="description"
+              value={info.description}
+              onChange={handleChange} // Update state on change
+              placeholder="Enter description"
+            />
           </div>
           <div className="mb-3">
             <label className="form-label">Upload File</label>
@@ -50,10 +82,14 @@ const FormModal = ({ modalOpen, handleModalClose }) => {
             />
           </div>
           <div className="d-flex justify-content-between">
-            <Button variant="primary" type="submit">
+            <Button 
+              variant="primary" 
+              type="submit">
               Submit
             </Button>
-            <Button variant="danger" onClick={handleModalClose}>
+            <Button 
+              variant="danger"
+              onClick={handleModalClose}>
               Close
             </Button>
           </div>
