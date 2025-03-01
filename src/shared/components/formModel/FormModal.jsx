@@ -22,9 +22,9 @@ const FormModal = ({ modalOpen, handleModalClose }) => {
 // submit form 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Title', title);
-    console.log('Description', description);
-    console.log('Image URL', img); 
+    setTitle("");
+    setDescription("")
+    setImg("")
   }
 
 
@@ -62,6 +62,7 @@ const FormModal = ({ modalOpen, handleModalClose }) => {
             <input 
               type="file" 
               className="form-control"
+              value={img}
               onChange={handleImgChange}
             />
           </div>
