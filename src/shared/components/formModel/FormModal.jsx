@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
+import { db, storage } from "../../../features/firebase.config"; 
+import firebase from 'firebase/compat/app';
 
 const FormModal = ({ modalOpen, handleModalClose }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [img, setImg] = useState("");
+  const [img, setImg] = useState(null);
 
   // event handlers to update state variables 
   const handleTitleChange = (e) => {
@@ -16,15 +18,38 @@ const FormModal = ({ modalOpen, handleModalClose }) => {
   };
 
   const handleImgChange = (e) => {
-    setImg(URL.createObjectURL(e.target.files[0]));
-  }
+    setImg(e.target.files[0]);
+  };
 
 // submit form 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if(!img){
+      alert("Please upload an image.");
+      return; 
+    }
+    
+    // uploading to the firebase store 
+    const storageRef = storage.ref();
+    const imgRef = storageRef.child(`images/${img.name}`);
+      await imgRef.put(img); // uploading the file 
+
+    // get the image url 
+    const imgURL = await imgRef.getDownloadURL(); 
+
+    // save the data to firebase storage 
+      await db.collection("posts").add({
+        title,
+        description,
+        imageUrl: imgURL,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      }); 
+
     setTitle("");
     setDescription("")
-    setImg("")
+    setImg(null);
+    handleModalClose(); 
   }
 
 
