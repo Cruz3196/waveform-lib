@@ -1,25 +1,24 @@
-import { useState, useEffect } from "react";
-import { db } from "../../../features/firebase.config"; // Adjust path if needed
+import { useEffect, useState } from "react";
+import { db } from "../../../features/firebase.config";
 import { collection, onSnapshot } from "firebase/firestore";
 
 const useFetchPosts = () => {
-    const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState([]);
 
-    useEffect(() => {
-      // Listen for real-time updates from Firestore
-        const unsubscribe = onSnapshot(collection(db, "posts"), (snapshot) => {
-            setPosts(
-                snapshot.docs.map((doc) => ({
-                    id: doc.id,
-                    data: doc.data(), // Spread data directly
-                }))
-            );
-        });
+  useEffect(() => {
+    const unsubscribe = onSnapshot(collection(db, "posts"), (snapshot) => {
+      setPosts(
+        snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data()
+        }))
+      );
+    });
 
-      return () => unsubscribe(); // Cleanup listener on unmount
-    }, []);
+    return () => unsubscribe();
+  }, []);
 
-  return posts; // Return fetched posts
+  return posts; 
 };
 
 export default useFetchPosts;
