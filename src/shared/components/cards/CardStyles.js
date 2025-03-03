@@ -7,7 +7,9 @@ const CardStyles = {
         textAlign: "center",
         boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
         padding: "30px",
-        width: "100%"
+        width: "100%",
+        marginTop: "30px",
+        marginBottom: "30px"
     },
     CardStyle: {
         display: "flex",
