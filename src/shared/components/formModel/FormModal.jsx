@@ -83,6 +83,7 @@ const FormModal = ({ modalOpen, handleModalClose }) => {
             <input
               type="file"
               className="form-control"
+              value={img}
               onChange={handleImgChange}
             />
           </div>
