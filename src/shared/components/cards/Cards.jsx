@@ -1,26 +1,41 @@
 import React from "react";
-import { Card, Row, Col } from "react-bootstrap";
+import { Card, Row, Col, Container } from "react-bootstrap";
 import useFetchPosts from "./useFetchPosts";
+import CardStyles from "./CardStyles";
 
 const Cards = () => {
   const posts = useFetchPosts();
 
   return (
-    <Row className="g-4">
+    <Container style={CardStyles.CardContainer}>
+      <Row>
         {posts.map((post) => (
-          <Col key={post.id} md={4}>
+          <Col key={post.id} md={12}>
             <Card>
-              {post.imageUrl && (
-                <Card.Img variant="top" src={post.imageUrl} alt={post.title} />
-              )}
-              <Card.Body>
-                <Card.Title>{post.title}</Card.Title>
-                <Card.Text>{post.description}</Card.Text>
-              </Card.Body>
+              <Row noGutters>
+                {/* Image on the Left */}
+                {post.imageUrl && (
+                  <Col md={6}>
+                    <Card.Img
+                      src={post.imageUrl}
+                      alt={post.title}
+                    />
+                  </Col>
+                )}
+
+                {/* Text on the Right */}
+                <Col md={6}>
+                  <Card.Body>
+                    <Card.Title>{post.title}</Card.Title>
+                    <Card.Text>{post.description}</Card.Text>
+                  </Card.Body>
+                </Col>
+              </Row>
             </Card>
           </Col>
         ))}
-    </Row>
+      </Row>
+    </Container>
   );
 };
 
