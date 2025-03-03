@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Hero, Cards } from "../../shared";
+import { Hero, Cards, PostTables } from "../../shared";
 import Pagination from "../..//shared/components/pagination/Pagination";
 import useFetchPosts from "../../shared/components/cards/useFetchPosts"; 
 
@@ -18,6 +18,7 @@ const Home = () => {
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
       />
+      <PostTables/>
     </>
   );
 };
