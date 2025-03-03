@@ -1,12 +1,14 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
+import postTableStyles from './postTableStyles';
 
 const PostTable = () => {
     const tableTitle = ["Author", "Comment", "Signal", "Date Added"];
 
     return (
         <div className="post-table-container">
-            <h2 className="table-header">Latest Comments</h2> {/* Title above the table */}
+            <h2 style={postTableStyles.tableHeading}>Latest Comments</h2> 
+
             <Table responsive bordered hover>
                 <thead>
                     <tr>
