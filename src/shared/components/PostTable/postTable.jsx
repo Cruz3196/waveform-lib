@@ -1,25 +1,30 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
 
-const postTable = () => {
+const PostTable = () => {
+    const tableTitle = ["Author", "Comment", "Signal", "Date Added"];
+
     return (
-        <Table responsive>
-            <thead>
-                <tr>
-                    {Array.from({ length: 4 }).map((_, index) => (
-                        <th key={index}>Table heading</th>
-                    ))}
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    {Array.from({ length: 4}).map((_, index) => (
-                        <td key={index}>Table cell {index}</td>
-                    ))}
-                </tr>
-            </tbody>
-        </Table>
+        <div className="post-table-container">
+            <h2 className="table-header">Latest Comments</h2> {/* Title above the table */}
+            <Table responsive bordered hover>
+                <thead>
+                    <tr>
+                        {tableTitle.map((title, index) => (
+                            <th key={index}>{title}</th>
+                        ))}
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        {tableTitle.map((_, index) => (
+                            <td key={index}>Table cell {index}</td>
+                        ))}
+                    </tr>
+                </tbody>
+            </Table>
+        </div>
     );
 }
 
-export default postTable;
+export default PostTable;
