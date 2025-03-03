@@ -11,17 +11,10 @@ const CardStyles = {
         marginTop: "30px",
         marginBottom: "30px"
     },
-    CardStyle: {
-        display: "flex",
-        flexDirection: "row",
-        width: "100%",
-        maxWidth: "900px",
-        height: "auto",
-        padding: "15px",
-        alignItems: "center",
+    Cardbody: {         
         border: "none",
-        boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
-        overflow: "hidden",
+        padding: "0", 
+        margin: "0"
     },
     CardImage: {
         width: "100%",

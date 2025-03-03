@@ -10,8 +10,13 @@ const Cards = () => {
     <Container style={CardStyles.CardContainer}>
       <Row>
         {posts.map((post) => (
-          <Col key={post.id} md={12}>
-            <Card>
+          <Col 
+            key={post.id} 
+            md={12} 
+            >
+            <Card
+              style={CardStyles.Cardbody}
+            >
               <Row noGutters>
                 {/* Image on the Left */}
                 {post.imageUrl && (
@@ -24,7 +29,9 @@ const Cards = () => {
                 )}
 
                 {/* Text on the Right */}
-                <Col md={6}>
+                <Col 
+                  md={6}
+                  >
                   <Card.Body>
                     <Card.Title>{post.title}</Card.Title>
                     <Card.Text>{post.description}</Card.Text>
