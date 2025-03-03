@@ -7,8 +7,9 @@ import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 const FormModal = ({ modalOpen, handleModalClose }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [img, setImg] = useState(null); // Updated: should be null instead of empty string
+  const [img, setImg] = useState(null); 
 
+  
   // event handlers to update state variables
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleDescriptionChange = (e) => setDescription(e.target.value);
