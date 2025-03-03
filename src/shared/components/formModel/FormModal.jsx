@@ -1,32 +1,56 @@
-import React, { useState } from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import React, { useState } from "react";
+import { Modal, Button } from "react-bootstrap";
+import { db } from "../../../features/firebase.config";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 const FormModal = ({ modalOpen, handleModalClose }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [img, setImg] = useState("");
+  const [img, setImg] = useState(null); // Updated: should be null instead of empty string
 
-  // event handlers to update state variables 
-  const handleTitleChange = (e) => {
-    setTitle(e.target.value);
-  };
+  // event handlers to update state variables
+  const handleTitleChange = (e) => setTitle(e.target.value);
+  const handleDescriptionChange = (e) => setDescription(e.target.value);
+  const handleImgChange = (e) => setImg(e.target.files[0]);
 
-  const handleDescriptionChange = (e) => {
-    setDescription(e.target.value);
-  };
-
-  const handleImgChange = (e) => {
-    setImg(URL.createObjectURL(e.target.files[0]));
-  }
-
-// submit form 
-  const handleSubmit = (e) => {
+  // submit form
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Title', title);
-    console.log('Description', description);
-    console.log('Image URL', img); 
-  }
 
+    if (!img) {
+      alert("Please upload an image.");
+      return;
+    }
+
+    try {
+      const storage = getStorage(); // Initialize Firebase Storage
+      const imgRef = ref(storage, `images/${img.name}`);
+
+      // Upload file to Firebase Storage
+      await uploadBytes(imgRef, img);
+
+      // Get the image URL
+      const imgURL = await getDownloadURL(imgRef);
+
+      // Save post data to Firestore
+      await addDoc(collection(db, "posts"), {
+        title,
+        description,
+        imageUrl: imgURL,
+        timestamp: serverTimestamp(),
+      });
+
+      // Reset form fields
+      setTitle("");
+      setDescription("");
+      setImg(null);
+      handleModalClose();
+    } catch (error) {
+      console.error("Error uploading image: ", error);
+      alert("Error uploading image. Please try again.");
+    }
+  };
 
   return (
     <Modal show={modalOpen} onHide={handleModalClose}>
@@ -37,44 +61,37 @@ const FormModal = ({ modalOpen, handleModalClose }) => {
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
             <label className="form-label">Title</label>
-            <input 
-              type="text" 
-              className="form-control"     
-              placeholder="Enter title" 
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Enter title"
               value={title}
               onChange={handleTitleChange}
             />
           </div>
           <div className="mb-3">
             <label className="form-label">Description</label>
-            <textarea 
-              className="form-control" 
-              placeholder="Enter description" 
+            <textarea
+              className="form-control"
+              placeholder="Enter description"
               value={description}
               onChange={handleDescriptionChange}
             />
           </div>
           <div className="mb-3">
-            <label 
-              className="form-label">
-                Upload File
-            </label>
-            <input 
-              type="file" 
+            <label className="form-label">Upload File</label>
+            <input
+              type="file"
               className="form-control"
               onChange={handleImgChange}
             />
           </div>
           <div className="d-flex justify-content-between">
-            <Button 
-              variant="primary" 
-              type="submit">
-                Submit
-              </Button>
-            <Button 
-              variant="danger" 
-              onClick={handleModalClose}>
-                Close
+            <Button variant="primary" type="submit">
+              Submit
+            </Button>
+            <Button variant="danger" onClick={handleModalClose}>
+              Close
             </Button>
           </div>
         </form>

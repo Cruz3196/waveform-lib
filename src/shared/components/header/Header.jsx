@@ -20,9 +20,15 @@ class Header extends React.Component {
         <Navbar expand="md" className="bg-body-tertiary">
           <Container>
             <Navbar.Brand href="#">
-              <img src={Rivianlogo2} width="290" height="90" alt="Logo" />
+              <img 
+                src={Rivianlogo2} 
+                width="290" 
+                height="90" 
+                alt="Logo" />
             </Navbar.Brand>
-            <Navbar.Toggle aria-controls="navbarScroll" />
+            <Navbar.Toggle 
+              aria-controls="navbarScroll" 
+            />
             <Navbar.Collapse id="navbarScroll">
               <Nav className="me-auto my-2 my-lg-0" navbarScroll>
                 <Nav.Link href="#action1">Library</Nav.Link>
