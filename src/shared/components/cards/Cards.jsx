@@ -3,35 +3,31 @@ import { Card, Row, Col, Container } from "react-bootstrap";
 import useFetchPosts from "./useFetchPosts";
 import CardStyles from "./CardStyles";
 
-const Cards = () => {
+const Cards = ({ currentPage, postsPerPage }) => {
   const posts = useFetchPosts();
+
+  // Pagination Logic
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirst = indexOfLastPost - postsPerPage;
+  const currentPosts = posts.slice(indexOfFirst, indexOfLastPost);
 
   return (
     <Container style={CardStyles.CardContainer}>
       <Row>
-        {posts.map((post) => (
+        {currentPosts.map((post) => (
           <Col 
             key={post.id} 
-            md={12} 
-            >
-            <Card
-              style={CardStyles.Cardbody}
-            >
+            md={12}
+          >
+            <Card 
+              style={CardStyles.Cardbody}>
               <Row noGutters>
-                {/* Image on the Left */}
                 {post.imageUrl && (
                   <Col md={6}>
-                    <Card.Img
-                      src={post.imageUrl}
-                      alt={post.title}
-                    />
+                    <Card.Img src={post.imageUrl} alt={post.title} />
                   </Col>
                 )}
-
-                {/* Text on the Right */}
-                <Col 
-                  md={6}
-                  >
+                <Col md={6}>
                   <Card.Body>
                     <Card.Title>{post.title}</Card.Title>
                     <Card.Text>{post.description}</Card.Text>
