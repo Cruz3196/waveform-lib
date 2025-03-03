@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Container, Form, Nav, Navbar } from 'react-bootstrap';
 import Rivianlogo2 from "../../../assets/images/Rivianlogo2.png";
 import FormModal from '../formModel/FormModal';
+import HeaderStyles from './HeaderStyles';
 
 class Header extends React.Component {
   state = {
@@ -17,7 +18,11 @@ class Header extends React.Component {
   render() {
     return (
       <>
-        <Navbar expand="md" className="bg-body-tertiary">
+        <Navbar 
+          expand="md" 
+          className="bg-body-tertiary"
+          style={HeaderStyles.HeaderContainer}
+        >
           <Container>
             <Navbar.Brand href="#">
               <img 
