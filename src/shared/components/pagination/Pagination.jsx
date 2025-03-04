@@ -1,4 +1,5 @@
 import React from "react";
+import PaginationStyles from "./PaginationStyles";
 
 const Pagination = ({ postsPerPage, totalPosts, currentPage, setCurrentPage }) => {
     const pageNumbers = [];
@@ -9,23 +10,34 @@ const Pagination = ({ postsPerPage, totalPosts, currentPage, setCurrentPage }) =
 
     return (
         <nav>
-            <ul 
-            className="pagination"
-                style={{ display: "flex", justifyContent: "center" }}
-            >
+            <ul style={PaginationStyles.pagination}>
                 {pageNumbers.map((number) => (
-                    <li 
-                        key={number} 
-                        className={`page-item ${currentPage === number ? "active" : ""}`}
-                    >
-                        <button 
-                        onClick={() => setCurrentPage(number)} 
-                        className="page-link"
+                    <li key={number} style={PaginationStyles.pageItem}>
+                        <button
+                            onClick={() => setCurrentPage(number)}
+                            style={{
+                                ...PaginationStyles.pageButton,
+                                ...(currentPage === number ? PaginationStyles.activePageButton : {}),
+                            }}
                         >
                             {number}
                         </button>
                     </li>
                 ))}
+                <li style={PaginationStyles.pageItem}>
+                    <button
+                        onClick={() => setCurrentPage(currentPage + 1)}
+                        disabled={currentPage === pageNumbers.length}
+                        style={{
+                            ...PaginationStyles.pageButton,
+                            ...(currentPage === pageNumbers.length
+                                ? PaginationStyles.disabledPageButton
+                                : {}),
+                        }}
+                    >
+                        »
+                    </button>
+                </li>
             </ul>
         </nav>
     );

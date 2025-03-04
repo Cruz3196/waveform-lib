@@ -14,12 +14,15 @@ const heroStyle = {
         height: "100px",
     },
     heroTitle:{
+        marginTop: "80px",
+        marginBottom: "20px",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         textAlign: "center",
         fontSize: "32px",
-        fontWeight: "bold", 
+        fontWeight: "bold",
+        color: "#0089cf",
     },
     heroSearchContainer:{
         width: "100%",
