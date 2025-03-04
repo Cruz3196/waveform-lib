@@ -28,9 +28,9 @@ const PostTable = () => {
                             <td style={postTableStyles.thTd}>{row.author}</td>
                             <td style={postTableStyles.thTd}>{row.comment}</td>
                             <td style={postTableStyles.thTd}>
-                                <a href="#" style={postTableStyles.tableLink}>
+                                <button href="#" style={postTableStyles.tableLink}>
                                     {row.signal}
-                                </a>
+                                </button>
                             </td>
                             <td style={postTableStyles.thTd}>{row.date}</td>
                         </tr>

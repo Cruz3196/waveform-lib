@@ -1,7 +1,8 @@
 const HeaderStyles = {
     HeaderContainer : {
         position: "sticky",
-        top: "0" 
+        top: "0",
+        zIndex: "1"
     }
 };
 
