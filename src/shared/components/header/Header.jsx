@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button, Container, Form, Nav, Navbar } from 'react-bootstrap';
 import Rivianlogo2 from "../../../assets/images/Rivianlogo2.png";
 import FormModal from '../formModel/FormModal';
@@ -36,13 +37,32 @@ class Header extends React.Component {
             />
             <Navbar.Collapse id="navbarScroll">
               <Nav className="me-auto my-2 my-lg-0" navbarScroll>
-                <Nav.Link href="#action1">Library</Nav.Link>
-                <Nav.Link href="#action2" onClick={this.handleModalToggle}>
+                <Nav.Link 
+                  as={Link}
+                  to="/"
+                  href="#action1"
+                  >
+                    Library
+                </Nav.Link>
+                <Nav.Link 
+                  href="#action2" 
+                  onClick={this.handleModalToggle}>
                   Upload
+                </Nav.Link>
+                <Nav.Link 
+                  as={Link}
+                  to="/profile"
+                  href="#action2"
+                  >
+                  Profile
                 </Nav.Link>
               </Nav>
               <Form className="d-flex">
-                <Form.Control type="search" placeholder="Search" className="me-2" aria-label="Search" />
+                <Form.Control 
+                  type="search" 
+                  placeholder="Search" 
+                  className="me-2" 
+                  aria-label="Search" />
                 <Button variant="outline-success">Search</Button>
               </Form>
             </Navbar.Collapse>
