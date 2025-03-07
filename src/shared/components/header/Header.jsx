@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Container, Form, Nav, Navbar } from 'react-bootstrap';
+import { Button, Container, Form, Nav, Navbar, NavDropdown, Dropdown } from 'react-bootstrap';
 import Rivianlogo2 from "../../../assets/images/Rivianlogo2.png";
 import FormModal from '../formModel/FormModal';
 import HeaderStyles from './HeaderStyles';
@@ -15,6 +15,7 @@ class Header extends React.Component {
       modalOpen: !prevState.modalOpen
     }));
   };
+
 
   render() {
     return (
@@ -49,13 +50,12 @@ class Header extends React.Component {
                   onClick={this.handleModalToggle}>
                   Upload
                 </Nav.Link>
-                <Nav.Link 
-                  as={Link}
-                  to="/profile"
-                  href="#action2"
-                  >
-                  Profile
-                </Nav.Link>
+                <NavDropdown
+                  title="Profile"
+                >
+      <Dropdown.Item eventKey="2">Another action</Dropdown.Item>
+      <Dropdown.Item eventKey="3">Something else here</Dropdown.Item>
+                </NavDropdown>
               </Nav>
               <Form className="d-flex">
                 <Form.Control 
