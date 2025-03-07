@@ -20,7 +20,7 @@ class Header extends React.Component {
       <>
         <Navbar 
           expand="md" 
-          className="bg-body-tertiary"
+          bg="dark" data-bs-theme="dark"
           style={HeaderStyles.HeaderContainer}
         >
           <Container>
