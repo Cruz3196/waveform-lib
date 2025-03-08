@@ -53,8 +53,16 @@ class Header extends React.Component {
                 <NavDropdown
                   title="Profile"
                 >
-      <Dropdown.Item eventKey="2">Another action</Dropdown.Item>
-      <Dropdown.Item eventKey="3">Something else here</Dropdown.Item>
+                  <Dropdown.Item 
+                    eventKey="2"
+                    >
+                      Login
+                  </Dropdown.Item>
+                  <Dropdown.Item 
+                    eventKey="3"
+                      >
+                      Register
+                    </Dropdown.Item>
                 </NavDropdown>
               </Nav>
               <Form className="d-flex">
