@@ -1,12 +1,17 @@
 import { useState } from "react";
-import { userAuthContext } from "./UserAuthContext";
+import UserAuthContext from "../context/UserAuthContext";
 
-export function UserAuthContextProvider ({children}) {
-    const [user,setUser] = useState({});
+export function UserAuthContextProvider({ children }) {
+    const [user, setUser] = useState(null);
+
+    const logIn = () => {};  
+    const signUp = () => {}; 
+    const logOut = () => {}; 
+    const googleSignIn = () => {}; 
 
     return (
-        <userAuthContext.Provider
-            value ={{
+        <UserAuthContext.Provider
+            value={{
                 user,
                 logIn,
                 signUp,
@@ -15,6 +20,6 @@ export function UserAuthContextProvider ({children}) {
             }}
         >
             {children}
-        </userAuthContext.Provider>
-    )
+        </UserAuthContext.Provider>
+    );
 }
