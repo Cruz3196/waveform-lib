@@ -6,7 +6,7 @@ const heroStyle = {
         alignItems: "center", 
         height: "450px",
         marginTop: "3rem",
-        padding: "10px"
+        padding: "10px",
     }, 
     heroTitleContainer:{
         justifyContent: "center",
@@ -38,7 +38,8 @@ const heroStyle = {
         alignItems: "center",
         textAlign: "center",
         boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
-        padding: "30px"
+        padding: "30px",
+        backgroundColor: "white",
     }
 }
 

@@ -8,12 +8,13 @@ const CardStyles = {
         boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
         padding: "30px",
         marginTop: "30px",
-        marginBottom: "30px"
+        marginBottom: "30px",
+        backgroundColor: "white",
     },
     Cardbody: {         
         border: "none",
         padding: "0", 
-        margin: "0"
+        margin: "0",
     },
     CardImage: {
         width: "100%",
