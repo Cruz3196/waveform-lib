@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { Button, Container, Form, Nav, Navbar, NavDropdown, Dropdown } from 'react-bootstrap';
 import Rivianlogo2 from "../../../assets/images/Rivianlogo2.png";
 import FormModal from '../formModel/FormModal';
@@ -26,7 +26,7 @@ class Header extends React.Component {
           style={HeaderStyles.HeaderContainer}
         >
           <Container>
-            <Navbar.Brand href="#">
+            <Navbar.Brand href="/">
               <img 
                 src={Rivianlogo2} 
                 width="290" 
@@ -56,12 +56,22 @@ class Header extends React.Component {
                   <Dropdown.Item 
                     eventKey="2"
                     >
-                      Login
+                      <Nav.Link
+                        as={Link}
+                        to="/login"
+                      >
+                        Login
+                      </Nav.Link>
                   </Dropdown.Item>
                   <Dropdown.Item 
                     eventKey="3"
                       >
-                      Register
+                      <Nav.Link
+                        as={Link}
+                        to="/register"
+                      >
+                        Register
+                      </Nav.Link>
                     </Dropdown.Item>
                 </NavDropdown>
               </Nav>
