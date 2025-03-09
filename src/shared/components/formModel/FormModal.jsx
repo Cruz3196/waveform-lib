@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button, Container } from "react-bootstrap";
 import { db } from "../../../features/firebase.config";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
@@ -54,7 +54,11 @@ const FormModal = ({ modalOpen, handleModalClose }) => {
   };
 
   return (
-    <Modal show={modalOpen} onHide={handleModalClose}>
+    <Modal 
+      show={modalOpen} 
+      onHide={handleModalClose}
+      dialogClassName="modal-dialog-centered"
+      >
       <Modal.Header closeButton>
         <Modal.Title>Form</Modal.Title>
       </Modal.Header>
