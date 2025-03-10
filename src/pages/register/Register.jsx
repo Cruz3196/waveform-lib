@@ -1,8 +1,9 @@
 import React, { useState }  from 'react';
 import { Form, Button, Container } from 'react-bootstrap';
 import registerStyles from './RegisterStyles'; 
-import { auth } from '../../features/firebase.config';
+import { auth,  db } from '../../features/firebase.config';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { setDoc, doc } from 'firebase/firestore';
 
 const Register = () => {
   const [email, setEmail] = useState("")
@@ -14,7 +15,16 @@ const Register = () => {
     e.preventDefault()
     try{
       await createUserWithEmailAndPassword(auth, email, password)
-      console.log("Account Created")
+      const user = auth.currentUser;
+      console.log(user);
+      if(user){
+        await setDoc(doc(db, "Users", user.uid), {
+          email: user.email,
+          username: username,
+          name: name,
+        });
+      }
+      console.log("User Registration Success!")
     }catch(err){
       console.log(err)
     }
