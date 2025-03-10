@@ -7,6 +7,8 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 const Register = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [name, setName] = useState("")
+  const [username, setUsername] = useState("")
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -29,6 +31,7 @@ const Register = () => {
               style={registerStyles.Input} 
               type="text" 
               placeholder="Name" 
+              onChange={(e) => setName(e.target.value)}
             />
           </Form.Group>
 
@@ -37,6 +40,7 @@ const Register = () => {
               style={registerStyles.Input} 
               type="text" 
               placeholder="Username"
+              onChange={(e) => setUsername(e.target.value)}
             />
           </Form.Group>
 
