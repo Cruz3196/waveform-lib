@@ -1,15 +1,28 @@
-import React  from 'react';
+import React, { useState }  from 'react';
 import { Form, Button, Container } from 'react-bootstrap';
 import registerStyles from './RegisterStyles'; 
+import { auth } from '../../features/firebase.config';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 const Register = () => {
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
 
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    try{
+      await createUserWithEmailAndPassword(auth, email, password)
+      console.log("Account Created")
+    }catch(err){
+      console.log(err)
+    }
+  }
 
   return (
     <Container style={registerStyles.Container}>
       <div style={registerStyles.FormWrapper}>
         <h2 style={registerStyles.Title}>Sign Up</h2>
-        <Form>
+        <Form onSubmit={handleSubmit}>
 
           <Form.Group className="mb-3">
             <Form.Control 
@@ -32,6 +45,7 @@ const Register = () => {
               style={registerStyles.Input} 
               type="email" 
               placeholder="E-Mail"
+              onChange={(e) => setEmail(e.target.value)}
             />
           </Form.Group>
 
@@ -40,14 +54,7 @@ const Register = () => {
               style={registerStyles.Input} 
               type="password" 
               placeholder="Password" 
-            />
-          </Form.Group>
-
-          <Form.Group className="mb-3">
-            <Form.Control 
-              style={registerStyles.Input} 
-              type="password" 
-              placeholder="Confirm Password"
+              onChange={(e) => setPassword(e.target.value)}
             />
           </Form.Group>
 

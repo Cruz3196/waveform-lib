@@ -1,21 +1,36 @@
-import React from "react";
+import React, {useState} from "react";
 import { Form, Button, Container } from "react-bootstrap";
 import LoginStyles from "./LoginStyles"; 
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../features/firebase.config";
 
 const Login = () => {
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        try{
+            await signInWithEmailAndPassword(auth, email, password)
+            console.log("Login Successfully")
+        }catch(err){
+            console.log(err)
+        }
+    }
 
     return (
         <Container style={LoginStyles.Container}>
             <div style={LoginStyles.FormWrapper}> 
                 <h2 style={LoginStyles.Title}>Login</h2> 
-                <Form>
+                <Form onSubmit={handleSubmit}>
                     
                     <Form.Group className="mb-3">
                         <Form.Label>Email address</Form.Label>
                         <Form.Control 
                             type="email" 
                             placeholder="Enter email" 
-                            style={LoginStyles.Input} 
+                            style={LoginStyles.Input}
+                            onChange={(e) => setEmail(e.target.value)} 
                         />
                     </Form.Group>
 
@@ -25,6 +40,7 @@ const Login = () => {
                             type="password" 
                             placeholder="Password" 
                             style={LoginStyles.Input}  
+                            onChange={(e) => setPassword(e.target.value)}
                         />
                     </Form.Group>
 

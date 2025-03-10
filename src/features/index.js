@@ -1,1 +1,0 @@
-export { UserAuthContextProvider as AuthProvider} from "./context/UserAuthContext";

@@ -1,12 +1,11 @@
 import React from "react";
-import { Routes, Route} from "react-router-dom";
+import { Routes, Route, BrowserRouter as Router} from "react-router-dom";
 import { Home, Profile, LogIn, Register } from "./pages";
 import { Header} from "./shared";
-import { AuthProvider } from "./features";
 
 function App() {
   return (
-    <AuthProvider>
+    <Router>
         <Header/>
           <Routes>
             <Route path="/" element={<Home/>}/> 
@@ -14,7 +13,7 @@ function App() {
             <Route path="/login" element={<LogIn/>}/>
             <Route path="/register" element={<Register/>}/>
           </Routes>
-    </AuthProvider>
+    </Router>
   );
 }
 
