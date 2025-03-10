@@ -1,8 +1,8 @@
 import React from "react";
 import { Routes, Route} from "react-router-dom";
-import { AuthProvider } from "./features";
 import { Home, Profile, LogIn, Register } from "./pages";
 import { Header} from "./shared";
+import { AuthProvider } from "./features";
 
 function App() {
   return (

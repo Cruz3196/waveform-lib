@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Button, Container, Form, Nav, Navbar, NavDropdown, Dropdown } from 'react-bootstrap';
 import Rivianlogo2 from "../../../assets/images/Rivianlogo2.png";
 import FormModal from '../formModel/FormModal';
