@@ -1,46 +1,50 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import { auth } from '../firebase.config';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from 'firebase/auth';
 
-// Create the context
 const userAuthContext = createContext();
 
-// Custom hook to use the UserAuthContext
 export function useUserAuth() {
     return useContext(userAuthContext);
 }
 
-// The context provider that holds the authentication state and functions
 export function UserAuthContextProvider({ children }) {
     const [user, setUser] = useState(null);
 
-  // Function to handle login
-    const logIn = (email, password) => {
-    // Add login logic here (e.g., Firebase authentication)
-    // For example: firebase.auth().signInWithEmailAndPassword(email, password)
-    setUser({ email }); // Example, you'd replace this with actual user info from your auth service
-    };
+  // Log in function
+    function logIn(email, password) {
+        return signInWithEmailAndPassword(auth, email, password);
+    }
 
-  // Function to handle signup
-    const signUp = (email, password) => {
-    // Add signup logic here
-    // For example: firebase.auth().createUserWithEmailAndPassword(email, password)
-    setUser({ email }); // Example
-    };
+  // Sign up function
+    function signUp(email, password) {
+        return createUserWithEmailAndPassword(auth, email, password);
+    }
 
-  // Function to handle logout
-  const logOut = () => {
-    setUser(null); // Reset user state
-  };
+  // Log out function
+    function logOut() {
+        return signOut(auth);
+    }
 
-  // Function to handle Google Sign-In
-    const googleSignIn = () => {
-      // Add Google Sign-In logic here
-      // For example: firebase.auth().signInWithPopup(googleProvider)
-      setUser({ email: 'googleuser@example.com' }); // Example
-    };
+  // Google Sign-In function
+    function googleSignIn() {
+        const googleAuthProvider = new GoogleAuthProvider();
+        return signInWithPopup(auth, googleAuthProvider);
+    }
 
-  return (
-    <userAuthContext.Provider value={{ user, logIn, signUp, logOut, googleSignIn }}>
-        {children}
-    </userAuthContext.Provider>
-  );
+  // Firebase listener to track authentication state changes
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+            console.log("Auth state changed:", currentUser);
+            setUser(currentUser);  // Update user state based on the auth state
+        });
+
+      return () => unsubscribe(); // Clean up listener when component is unmounted
+    }, []);
+
+    return (
+        <userAuthContext.Provider value={{ user, logIn, signUp, logOut, googleSignIn }}>
+            {children}
+        </userAuthContext.Provider>
+    );
 }
