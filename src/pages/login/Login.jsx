@@ -3,6 +3,7 @@ import { Form, Button, Container } from "react-bootstrap";
 import LoginStyles from "./LoginStyles"; 
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../features/firebase.config";
+import { toast } from "react-toastify";
 
 const Login = () => {
     const [email, setEmail] = useState("")
@@ -12,11 +13,16 @@ const Login = () => {
         e.preventDefault()
         try{
             await signInWithEmailAndPassword(auth, email, password)
-            console.log("Login Successfully")
-        }catch(err){
-            console.log(err)
-        }
-    }
+            console.log("Login Successfully");
+            window.location.href ="/profile";
+            toast.success("Login Successfully")
+        }catch(error){
+            console.log(error.message)
+            toast.error(error.message, {
+                position: "bottom-center",
+            })
+        };
+    };
 
     return (
         <Container style={LoginStyles.Container}>
