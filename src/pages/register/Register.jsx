@@ -1,9 +1,11 @@
 import React, { useState }  from 'react';
-import { Form, Button, Container } from 'react-bootstrap';
+import { Form, Button, Container} from 'react-bootstrap';
 import registerStyles from './RegisterStyles'; 
 import { auth,  db } from '../../features/firebase.config';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { setDoc, doc } from 'firebase/firestore';
+import { toast } from 'react-toastify';
+
 
 const Register = () => {
   const [email, setEmail] = useState("")
@@ -24,9 +26,16 @@ const Register = () => {
           name: name,
         });
       }
-      console.log("User Registration Success!")
-    }catch(err){
-      console.log(err)
+      
+      toast.success("User Registration Success!", {
+        position: "top-center",
+      });
+      console.log("User Registration Success!");
+    }catch(error){
+      console.log(error.message);
+      toast.error(error.message, {
+        position: "bottom-center",
+      });
     }
   }
 
