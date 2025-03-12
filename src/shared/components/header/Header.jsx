@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Container, Form, Nav, Navbar, NavDropdown, Dropdown } from 'react-bootstrap';
-import Rivianlogo2 from "../../../assets/images/Rivianlogo2.png";
+import rivianlogo3 from "../../../assets/images/rivianlogo3.png";
 import FormModal from '../formModel/FormModal';
 import HeaderStyles from './HeaderStyles';
 import { auth } from '../../../features/firebase.config';
@@ -34,7 +34,7 @@ class Header extends React.Component {
         <Navbar expand="md" bg="dark" data-bs-theme="dark" style={HeaderStyles.HeaderContainer}>
           <Container>
             <Navbar.Brand href="/">
-              <img src={Rivianlogo2} width="290" height="90" alt="Logo" />
+              <img src={rivianlogo3} width="290" height="90" alt="Logo" />
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="navbarScroll" />
             <Navbar.Collapse id="navbarScroll">
