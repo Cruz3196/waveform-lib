@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { Routes, Route, BrowserRouter as Router, Navigate} from "react-router-dom";
+import { Routes, Route, BrowserRouter as Router} from "react-router-dom";
 import { Home, Profile, LogIn, Register } from "./pages";
 import { Header} from "./shared";
 import { ToastContainer } from 'react-toastify';
 import { auth } from "./features/firebase.config";
 
 function App() {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(null);
+
   useEffect(()=> {
-    auth.onAuthStateChanged(user => {
+    const unsubscribe  = auth.onAuthStateChanged((user) => {
       setUser(user);
     });
-  });
+    return () => unsubscribe(); 
+  }, []);
 
   return (
     <Router>
-        <Header/>
+        <Header user={user}/>
           <Routes>
             <Route path="/" element={<Home/>}/> 
             <Route path="/login" element={<LogIn/>}/>

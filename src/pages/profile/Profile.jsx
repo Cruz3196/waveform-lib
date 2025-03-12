@@ -25,15 +25,15 @@ const Profile = () => {
     fetchUserData()
   }, [])
 
-  async function handleLogout(){
-    try {
-      await auth.signOut(); 
-      window.location.href = "/login";
-      console.log("User Logged Out"); 
-    } catch (error) {
-      console.log("Error Logging Out:", error.message);
-    }
-  }
+  // async function handleLogout(){
+  //   try {
+  //     await auth.signOut(); 
+  //     window.location.href = "/login";
+  //     console.log("User Logged Out"); 
+  //   } catch (error) {
+  //     console.log("Error Logging Out:", error.message);
+  //   }
+  // }
 
   return (
     <Container style={ProfileStyles.Container}>
@@ -79,11 +79,11 @@ const Profile = () => {
             <Button style={ProfileStyles.Button} type="submit">
               Save
             </Button>
-            <Button style={ProfileStyles.Button}
+            {/* <Button style={ProfileStyles.Button}
               onClick={handleLogout}
             >
               LogOut
-            </Button>
+            </Button> */}
           </Form>
         </div>
       ) : (
