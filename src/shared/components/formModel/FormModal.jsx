@@ -3,6 +3,7 @@ import { Modal, Button } from "react-bootstrap";
 import { db } from "../../../features/firebase.config";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { toast } from "react-toastify";
 
 const FormModal = ({ modalOpen, handleModalClose }) => {
   const [title, setTitle] = useState("");
@@ -20,7 +21,9 @@ const FormModal = ({ modalOpen, handleModalClose }) => {
     e.preventDefault();
 
     if (!img) {
-      alert("Please upload an image.");
+      toast.error("Please upload an image!", {
+        position:"top-center"
+      });
       return;
     }
 
@@ -47,9 +50,15 @@ const FormModal = ({ modalOpen, handleModalClose }) => {
       setDescription("");
       setImg(null);
       handleModalClose();
+
+    toast.success("Image Uploaded Success!", {
+      position: "top-center",
+    });
     } catch (error) {
       console.error("Error uploading image: ", error);
-      alert("Error uploading image. Please try again.");
+      toast.error("Error uploading image. Please try again.", {
+        position: "bottom-center"
+      });
     }
   };
 
