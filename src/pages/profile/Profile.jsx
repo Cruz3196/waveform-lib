@@ -1,9 +1,10 @@
 import React from 'react';
-import { ProfileInfo } from '../../shared';
+import { ProfileHeader, ProfileInfo } from '../../shared';
 
 const Profile = () => {
   return (
     <>
+      <ProfileHeader/>
       <ProfileInfo/>
     </>
   )

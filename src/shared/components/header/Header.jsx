@@ -7,15 +7,15 @@ import HeaderStyles from './HeaderStyles';
 import { auth } from '../../../features/firebase.config';
 
 class Header extends React.Component {
-  state = {
-    modalOpen: false
-  };
+  // state = {
+  //   modalOpen: false
+  // };
 
-  handleModalToggle = () => {
-    this.setState((prevState) => ({
-      modalOpen: !prevState.modalOpen
-    }));
-  };
+  // handleModalToggle = () => {
+  //   this.setState((prevState) => ({
+  //     modalOpen: !prevState.modalOpen
+  //   }));
+  // };
 
   handleLogout = async () => {
     try {
@@ -40,7 +40,7 @@ class Header extends React.Component {
             <Navbar.Collapse id="navbarScroll">
               <Nav className="me-auto my-2 my-lg-0" navbarScroll>
                 <Nav.Link as={Link} to="/">Library</Nav.Link>
-                <Nav.Link onClick={this.handleModalToggle}>Upload</Nav.Link>
+                {/* <Nav.Link onClick={this.handleModalToggle}>Upload</Nav.Link> */}
 
                 <NavDropdown title="Profile">
                   {user ? (
@@ -64,8 +64,8 @@ class Header extends React.Component {
           </Container>
         </Navbar>
 
-        {/* Modal Component */}
-        <FormModal modalOpen={this.state.modalOpen} handleModalClose={this.handleModalToggle} />
+        {/* Modal Component
+        <FormModal modalOpen={this.state.modalOpen} handleModalClose={this.handleModalToggle} /> */}
       </>
     );
   }

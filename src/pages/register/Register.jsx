@@ -12,6 +12,7 @@ const Register = () => {
   const [password, setPassword] = useState("")
   const [name, setName] = useState("")
   const [username, setUsername] = useState("")
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault()

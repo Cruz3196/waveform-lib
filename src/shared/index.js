@@ -4,3 +4,4 @@ export {default as Cards } from "./components/cards/Cards";
 export {default as PostTables } from "./components/PostTable/postTable";
 export {default as Loader} from "./components/Loader/loader";
 export {default as ProfileInfo} from "./components/ProfileInfo/ProfileInfo";
+export {default as ProfileHeader} from "./components/ProfileInfo/ProfileHeader";
