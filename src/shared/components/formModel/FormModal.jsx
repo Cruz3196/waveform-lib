@@ -52,12 +52,12 @@ const FormModal = ({ modalOpen, handleModalClose }) => {
       handleModalClose();
 
     toast.success("Image Uploaded Success!", {
-      position: "top-center",
+      position: "top-right",
     });
     } catch (error) {
       console.error("Error uploading image: ", error);
       toast.error("Error uploading image. Please try again.", {
-        position: "bottom-center"
+        position: "top-right"
       });
     }
   };

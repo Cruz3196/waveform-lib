@@ -11,15 +11,18 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        
         try{
             await signInWithEmailAndPassword(auth, email, password)
             console.log("Login Successfully");
             window.location.href ="/profile";
-            toast.success("Login Successfully")
+            toast.success("Login Successfully", {
+                position: "top-right"
+            });
         }catch(error){
             console.log(error.message)
-            toast.error(error.message, {
-                position: "bottom-center",
+            toast.error("Error Logging In", {
+                position: "top-right"
             })
         };
     };

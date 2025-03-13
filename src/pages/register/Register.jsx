@@ -28,13 +28,13 @@ const Register = () => {
       }
       
       toast.success("User Registration Success!", {
-        position: "top-center",
+        position: "top-right ",
       });
       console.log("User Registration Success!");
     }catch(error){
       console.log(error.message);
       toast.error(error.message, {
-        position: "bottom-center",
+        position: "top-right",
       });
     }
   }
