@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Container, Form, Nav, Navbar, NavDropdown, Dropdown } from 'react-bootstrap';
 import rivianlogo3 from "../../../assets/images/rivianlogo3.png";
-import FormModal from '../formModel/FormModal';
+// import FormModal from '../formModel/FormModal';
 import HeaderStyles from './HeaderStyles';
 import { auth } from '../../../features/firebase.config';
 
