@@ -15,30 +15,37 @@ const Register = () => {
   
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    try{
-      await createUserWithEmailAndPassword(auth, email, password)
-      const user = auth.currentUser;
-      console.log(user);
-      if(user){
+    e.preventDefault();
+    if (!email || !password || !name || !username) {
+      toast.error("All fields are required!", {
+        position: "top-right",
+      });
+      return;
+    }
+  
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email.trim(), password.trim());
+      const user = userCredential.user;
+  
+      if (user) {
         await setDoc(doc(db, "Users", user.uid), {
           email: user.email,
-          username: username,
-          name: name,
+          username: username.trim(),
+          name: name.trim(),
+        });
+  
+        toast.success("User Registration Success!", {
+          position: "top-right",
         });
       }
-      
-      toast.success("User Registration Success!", {
-        position: "top-right ",
-      });
-      console.log("User Registration Success!");
-    }catch(error){
-      console.log(error.message);
+    } catch (error) {
+      console.error("Firebase Error:", error.message);
       toast.error(error.message, {
         position: "top-right",
       });
     }
-  }
+  };
+  
 
   return (
     <Container style={registerStyles.Container}>
