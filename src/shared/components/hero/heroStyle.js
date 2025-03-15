@@ -14,8 +14,6 @@ const heroStyle = {
         height: "100px",
     },
     heroTitle:{
-        marginTop: "80px",
-        marginBottom: "20px",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",

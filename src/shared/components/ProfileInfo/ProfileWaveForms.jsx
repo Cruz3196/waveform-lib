@@ -24,8 +24,8 @@ const ProfileWaveForms = () => {
         {loading ? (
           <Loader />
         ) : (
-          <Row>
-            <Col>Your actual content goes here...</Col>
+          <Row style={ProfileWaveFormStyles.DataTitleContainer}>
+            <Col style={ProfileWaveFormStyles.DataTitle}>My Data </Col>
           </Row>
         )}
     </Container>

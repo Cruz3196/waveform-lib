@@ -30,7 +30,9 @@ const Cards = ({ currentPage, postsPerPage }) => {
               <Card style={CardStyles.Cardbody}>
                 <Row>
                   <Col md={6} style={CardStyles.ImageColumn}>
-                    <Skeleton height={100} width={100} />
+                    <div style={{ width: "100%", height: "100%" }}>
+                      <Skeleton height="100%" width="100%" />
+                    </div>
                   </Col>
                   <Col md={6} style={CardStyles.ContentColumn}>
                     <Card.Body>

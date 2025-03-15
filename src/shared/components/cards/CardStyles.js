@@ -21,11 +21,14 @@ const CardStyles = {
         justifyContent: "center",
         alignItems: "center",
         padding: "25px",
+        
       },
       CardImage: {
-        maxHeight: "300px",
-        maxWidth: "100%",
-        objectFit: "contain",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "300px",  // Set a fixed height to ensure visibility
+        padding: "15px",
       },
       ContentColumn: {
         paddingLeft: "20px", // Added extra padding to push content right
