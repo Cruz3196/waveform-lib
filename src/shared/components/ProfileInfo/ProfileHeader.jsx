@@ -3,7 +3,6 @@ import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 // import FormModal from "../formModel/FormModal";
 import ProfileHeaderStyles from "./ProfileHeaderStyles";
-import ProfileLib from "../ProfileLib/ProfileLib";
 
 class ProfileHeader extends React.Component {
     // state = {
@@ -27,7 +26,7 @@ class ProfileHeader extends React.Component {
                                 as={Link} to="/profile">
                                     Profile
                             </Nav.Link>
-                            <Nav.Link as={Link} to="/profilelib">
+                            <Nav.Link as={Link} to="/profileLibrary">
                                 {/* // onClick={this.handleModalToggle} */}
                                     My WaveForms
                             </Nav.Link>
