@@ -1,31 +1,34 @@
 import React from "react";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
-import FormModal from "../formModel/FormModal";
+import { Link } from "react-router-dom";
+// import FormModal from "../formModel/FormModal";
+import ProfileHeaderStyles from "./ProfileHeaderStyles";
+import ProfileLib from "../ProfileLib/ProfileLib";
 
 class ProfileHeader extends React.Component {
-    state = {
-        modalOpen: false
-    };
+    // state = {
+    //     modalOpen: false
+    // };
     
-    handleModalToggle = () => {
+    // handleModalToggle = () => {
 
-        this.setState((prevState) => ({
-            modalOpen: !prevState.modalOpen
-        }));
-    };
+    //     this.setState((prevState) => ({
+    //         modalOpen: !prevState.modalOpen
+    //     }));
+    // };
 
     render(){
         return(
             <>
-                <Navbar bg="light" data-bs-theme="light">
+                <Navbar bg="light" data-bs-theme="light" style={ProfileHeaderStyles.ProfileContainer}>
                     <Container>
                         <Nav className="me-auto">
                             <Nav.Link 
-                                href="#home">
-                                    Home
+                                as={Link} to="/profile">
+                                    Profile
                             </Nav.Link>
-                            <Nav.Link 
-                                onClick={this.handleModalToggle}>
+                            <Nav.Link as={Link} to="/profilelib">
+                                {/* // onClick={this.handleModalToggle} */}
                                     My WaveForms
                             </Nav.Link>
                             <NavDropdown title="Comments" id="basic-nav-dropdown">
@@ -39,7 +42,7 @@ class ProfileHeader extends React.Component {
                         </Nav>
                     </Container>
                 </Navbar>
-                <FormModal modalOpen={this.state.modalOpen} handleModalClose={this.handleModalToggle} />
+                {/* <FormModal modalOpen={this.state.modalOpen} handleModalClose={this.handleModalToggle} /> */}
             </>
         )
     }
