@@ -7,41 +7,35 @@ import "react-loading-skeleton/dist/skeleton.css"; // Import styles
 
 const Cards = ({ currentPage, postsPerPage }) => {
   const posts = useFetchPosts();
-  
-  // State to manage loading state (simulating the delay)
   const [loading, setLoading] = useState(true);
-
-  // Simulate loading delay
+  
   useEffect(() => {
     const timer = setTimeout(() => {
-      setLoading(false); // Stop loading after 2 seconds
+      setLoading(false);
     }, 2000);
-
-    // Clean up the timer when component unmounts
     return () => clearTimeout(timer);
   }, []);
-
-  // Pagination Logic
+  
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirst = indexOfLastPost - postsPerPage;
   const currentPosts = posts.slice(indexOfFirst, indexOfLastPost);
-
+  
   return (
     <Container style={CardStyles.CardContainer}>
-      <Row>
+      <Row className="g-4">
         {loading || currentPosts.length === 0 ? (
-          // If still loading or no posts are available, display skeleton loaders
+          // Display skeleton loaders
           Array(postsPerPage).fill().map((_, index) => (
-            <Col key={index} md={12}>
+            <Col key={index} xs={12}>
               <Card style={CardStyles.Cardbody}>
-                <Row noGutters>
-                  <Col md={6}>
-                    <Skeleton height={200} />
+                <Row>
+                  <Col md={6} style={CardStyles.ImageColumn}>
+                    <Skeleton height={100} width={100} />
                   </Col>
-                  <Col md={6}>
+                  <Col md={6} style={CardStyles.ContentColumn}>
                     <Card.Body>
                       <Skeleton width="60%" />
-                      <Skeleton />
+                      <Skeleton count={2} />
                     </Card.Body>
                   </Col>
                 </Row>
@@ -49,19 +43,24 @@ const Cards = ({ currentPage, postsPerPage }) => {
             </Col>
           ))
         ) : (
+          // Display posts
           currentPosts.map((post) => (
-            <Col key={post.id} md={12}>
+            <Col key={post.id} xs={12}>
               <Card style={CardStyles.Cardbody}>
-                <Row noGutters>
-                  {post.imageUrl && (
-                    <Col md={6}>
-                      <Card.Img src={post.imageUrl} alt={post.title} />
-                    </Col>
-                  )}
-                  <Col md={6}>
+                <Row>
+                  <Col md={6} style={CardStyles.ImageColumn}>
+                    {post.imageUrl && (
+                      <Card.Img 
+                        src={post.imageUrl} 
+                        alt={post.title} 
+                        style={CardStyles.CardImage} 
+                      />
+                    )}
+                  </Col>
+                  <Col md={6} style={CardStyles.ContentColumn}>
                     <Card.Body>
-                      <Card.Title>{post.title}</Card.Title>
-                      <Card.Text>{post.description}</Card.Text>
+                      <Card.Title style={CardStyles.TitleStyle}>{post.title}</Card.Title>
+                      <Card.Text style={CardStyles.DescriptionStyle}>{post.description}</Card.Text>
                     </Card.Body>
                   </Col>
                 </Row>

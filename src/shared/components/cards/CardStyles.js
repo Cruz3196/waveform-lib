@@ -1,36 +1,46 @@
 const CardStyles = {
-    CardContainer : {
-        minHeight: "120px",  
-        height: "auto",  
+    CardContainer: {
         justifyContent: "center",
         alignItems: "center",
-        textAlign: "center",
-        boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
-        padding: "30px",
+        padding: "20px",
         marginTop: "30px",
         marginBottom: "30px",
-        backgroundColor: "white",
-    },
-    Cardbody: {         
+        backgroundColor: "#f5f5f5",
+      },
+      Cardbody: {
         border: "none",
-        padding: "0", 
-        margin: "0",
-    },
-    CardImage: {
-        width: "100%",
-        maxWidth: "300px",
-        height: "180px",
-        objectFit: "cover",
-    },
-    TitleStyle: {
-        fontSize: "18px",
+        borderRadius: "8px",
+        boxShadow: "0px 2px 5px rgba(0, 0, 0, 0.1)",
+        marginBottom: "20px",
+        backgroundColor: "white",
+        overflow: "hidden",
+        height: "350px"
+      },
+      ImageColumn: {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        padding: "25px",
+      },
+      CardImage: {
+        maxHeight: "300px",
+        maxWidth: "100%",
+        objectFit: "contain",
+      },
+      ContentColumn: {
+        paddingLeft: "20px", // Added extra padding to push content right
+      },
+      TitleStyle: {
+        fontSize: "16px",
         fontWeight: "bold",
         marginBottom: "5px",
-    },
-    DescriptionStyle: {
+        textAlign: "left",
+      },
+      DescriptionStyle: {
         fontSize: "14px",
         color: "#666",
-    }
-};
+        textAlign: "left",
+      }
+};  
 
 export default CardStyles;
