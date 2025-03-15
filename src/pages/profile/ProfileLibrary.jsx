@@ -1,12 +1,12 @@
 import React from 'react';
-import { ProfileHeader } from '../../shared';
+import { ProfileHeader, ProfileWaveform } from '../../shared';
 
 const ProfileLibrary = () => {
   return (
-    <div>
+    <>
         <ProfileHeader/>
-        ProfileLibrary
-    </div>
+        <ProfileWaveform/>
+    </>
   )
 }
 
