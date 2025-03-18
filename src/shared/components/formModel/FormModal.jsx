@@ -40,7 +40,7 @@ const FormModal = ({ modalOpen, handleModalClose }) => {
         description,
         imageUrl: imgURL,
         userId: user.uid,
-        username: user.displayName || user.email, // Use displayName if available, else email
+        username: user.displayName || user.email, 
         timestamp: serverTimestamp(),
       });
   
