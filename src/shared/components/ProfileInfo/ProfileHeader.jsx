@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 // import FormModal from "../formModel/FormModal";
-import ProfileHeaderStyles from "./ProfileHeaderStyles";
+
 
 class ProfileHeader extends React.Component {
     // state = {
@@ -19,7 +19,7 @@ class ProfileHeader extends React.Component {
     render(){
         return(
             <>
-                <Navbar bg="light" data-bs-theme="light" style={ProfileHeaderStyles.ProfileContainer}>
+                <Navbar bg="light" data-bs-theme="light">
                     <Container>
                         <Nav className="me-auto">
                             <Nav.Link 

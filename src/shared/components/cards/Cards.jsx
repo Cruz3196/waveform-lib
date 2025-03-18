@@ -61,6 +61,9 @@ const Cards = ({ currentPage, postsPerPage }) => {
                   </Col>
                   <Col md={6} style={CardStyles.ContentColumn}>
                     <Card.Body>
+                      <Card.Subtitle className="mb-2 text-muted">
+                        Posted by: {post.username || "Unknown"}
+                      </Card.Subtitle>
                       <Card.Title style={CardStyles.TitleStyle}>{post.title}</Card.Title>
                       <Card.Text style={CardStyles.DescriptionStyle}>{post.description}</Card.Text>
                     </Card.Body>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
-import { db } from "../../../features/firebase.config";
+import { db, auth } from "../../../features/firebase.config";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { toast } from "react-toastify";
@@ -8,97 +8,75 @@ import { toast } from "react-toastify";
 const FormModal = ({ modalOpen, handleModalClose }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [img, setImg] = useState(null); 
+  const [img, setImg] = useState(null);
 
-  
-  // event handlers to update state variables
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleDescriptionChange = (e) => setDescription(e.target.value);
   const handleImgChange = (e) => setImg(e.target.files[0]);
 
-  // submit form
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     if (!img) {
-      toast.error("Please upload an image!", {
-        position:"top-center"
-      });
+      toast.error("Please upload an image!", { position: "right" });
       return;
     }
-
+  
+    const user = auth.currentUser;
+    if (!user) {
+      toast.error("You must be logged in to post!", { position: "top-right" });
+      return;
+    }
+  
     try {
-      const storage = getStorage(); // Initialize Firebase Storage
+      const storage = getStorage();
       const imgRef = ref(storage, `images/${img.name}`);
-
-      // Upload file to Firebase Storage
+  
       await uploadBytes(imgRef, img);
-
-      // Get the image URL
       const imgURL = await getDownloadURL(imgRef);
-
-      // Save post data to Firestore
+  
       await addDoc(collection(db, "posts"), {
         title,
         description,
         imageUrl: imgURL,
+        userId: user.uid,
+        username: user.displayName || user.email, // Use displayName if available, else email
         timestamp: serverTimestamp(),
       });
-
-      // Reset form fields
+  
       setTitle("");
       setDescription("");
       setImg(null);
       handleModalClose();
-
-    toast.success("Image Uploaded Success!", {
-      position: "top-right",
-    });
+  
+      toast.success("Post uploaded successfully!", { position: "top-right" });
     } catch (error) {
-      console.error("Error uploading image: ", error);
-      toast.error("Error uploading image. Please try again.", {
-        position: "top-right"
+      console.error("Error uploading post: ", error);
+      toast.error("Error uploading post. Please try again.", {
+        position: "top-right",
       });
     }
   };
+  
 
   return (
-    <Modal 
-      show={modalOpen} 
-      onHide={handleModalClose}
-      dialogClassName="modal-dialog-centered"
-      >
+    <Modal show={modalOpen} onHide={handleModalClose} dialogClassName="modal-dialog-centered">
       <Modal.Header closeButton>
-        <Modal.Title>Form</Modal.Title>
+        <Modal.Title>Create a Post</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
             <label className="form-label">Title</label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Enter title"
-              value={title}
-              onChange={handleTitleChange}
-            />
+            <input type="text" className="form-control" placeholder="Enter title" value={title} onChange={handleTitleChange} />
           </div>
           <div className="mb-3">
             <label className="form-label">Description</label>
-            <textarea
-              className="form-control"
-              placeholder="Enter description"
-              value={description}
-              onChange={handleDescriptionChange}
-            />
+            <textarea className="form-control" placeholder="Enter description" value={description} onChange={handleDescriptionChange} />
           </div>
           <div className="mb-3">
             <label className="form-label">Upload File</label>
-            <input
-              type="file"
-              className="form-control"
-              onChange={handleImgChange}
-            />
+            <input type="file" className="form-control" onChange={handleImgChange} />
           </div>
           <div className="d-flex justify-content-between">
             <Button variant="primary" type="submit">
