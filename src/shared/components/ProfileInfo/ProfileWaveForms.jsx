@@ -89,7 +89,7 @@ const ProfileWaveForms = () => {
             <Col md={12}>
               <Card style={ProfileWaveFormStyles.Cardbody}>
                 <Row>
-                <Col md={6} style={ProfileWaveFormStyles.ImageColumn}>
+                  <Col md={6} style={ProfileWaveFormStyles.ImageColumn}>
                     <div style={{ width: "100%", height: "100%" }}>
                       <Skeleton height="100%" width="100%" />
                     </div>
