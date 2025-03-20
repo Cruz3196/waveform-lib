@@ -14,14 +14,13 @@ const CardStyles = {
         marginBottom: "20px",
         backgroundColor: "white",
         overflow: "hidden",
-        height: "350px"
+        height: "350px",
       },
       ImageColumn: {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         padding: "25px",
-        
       },
       CardImage: {
         display: "flex",
