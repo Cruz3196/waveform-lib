@@ -41,7 +41,7 @@ const FormModal = ({ modalOpen, handleModalClose }) => {
         imageUrl: imgURL,
         userId: user.uid,
         username: user.displayName || user.email, 
-        timestamp: serverTimestamp(),
+        created: serverTimestamp(),
       });
   
       setTitle("");

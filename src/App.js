@@ -4,6 +4,9 @@ import { Home, Profile, LogIn, Register, ProfileLibrary} from "./pages";
 import { Header, PostDetails} from "./shared";
 import { ToastContainer } from 'react-toastify';
 import { auth } from "./features/firebase.config";
+import "react-loading-skeleton/dist/skeleton.css";
+
+
 
 function App() {
   const [user, setUser] = useState(null);

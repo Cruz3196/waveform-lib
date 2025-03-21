@@ -30,8 +30,8 @@ const Cards = ({ currentPage, postsPerPage }) => {
               <Card style={CardStyles.Cardbody}>
                 <Row>
                   <Col md={6} style={CardStyles.ImageColumn}>
-                    <div style={{ width: "100%", height: "100%" }}>
-                      <Skeleton height="100%" width="100%" />
+                    <div style={{ width: "100%", height: "300px" }}>
+                      <Skeleton height="300px" width="100%" />
                     </div>
                   </Col>
                   <Col md={6} style={CardStyles.ContentColumn}>
@@ -56,7 +56,7 @@ const Cards = ({ currentPage, postsPerPage }) => {
                           src={post.imageUrl} 
                           alt={post.title} 
                           style={CardStyles.CardImage} 
-                        />
+                          />
                       )}
                     </Col>
                     <Col md={6} style={CardStyles.ContentColumn}>
@@ -64,8 +64,16 @@ const Cards = ({ currentPage, postsPerPage }) => {
                         <Card.Subtitle className="mb-2 text-muted">
                           Posted by: {post.username || "Unknown"}
                         </Card.Subtitle>
-                        <Card.Title style={CardStyles.TitleStyle}>{post.title}</Card.Title>
-                        <Card.Text style={CardStyles.DescriptionStyle}>{post.description}</Card.Text>
+                          <Card.Title style={CardStyles.TitleStyle}>{post.title}</Card.Title>
+                          <Card.Text style={CardStyles.DescriptionStyle}>{post.description}</Card.Text>
+                          <Card.Text style={CardStyles.DescriptionStyle}>Signal added at: <span/>
+                            {post.created ? post.created.toDate().toLocaleString("en-US", { 
+                                year: "numeric", month: "long", day: "numeric", 
+                                hour: "2-digit", minute: "2-digit", second: "2-digit", 
+                                timeZoneName: "short" 
+                            }) : "No date available"}
+                          </Card.Text>
+
                         <Button>
                           <Link to={`/post/${post.id}`} style={{ textDecoration: "none", color: "inherit" }}>
                             More Details

@@ -2,25 +2,47 @@ import React, { useEffect, useState } from "react";
 import { Container, Row, Card, Col } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import useFetchPosts from "../cards/useFetchPosts";
-import postDetailsStyles from "./postDetailsStyles"; 
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css"; // Make sure this is included
+import Breadcrumbs from "../breadcrumbs/Breadcrumbs";
 
 const PostDetails = () => {
   const { id } = useParams(); 
   const posts = useFetchPosts(); 
   const [post, setPost] = useState(null);
+  const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
+    console.log("Fetching posts...");
     const foundPost = posts.find((p) => p.id === id);
-    setPost(foundPost);
+    
+    const timer = setTimeout(() => {
+      console.log("Setting post after delay:", foundPost);
+      setPost(foundPost);
+      setLoading(false);
+    }, 3000);
+
+    return () => clearTimeout(timer);
   }, [id, posts]);
 
-  if (!post) {
+  if (loading) { 
     return (
       <Container>
         <Row className="mt-3">
-          <Col>
-            <h3>Your Posts</h3>
-            <p>No posts to display.</p>
+          <Col xs={12}>
+            <Card style={{ padding: "20px" }}>
+              <Row>
+                <Col md={6} style={{ height: "300px" }}>
+                  <Skeleton height="100%" width="100%" />
+                </Col>
+                <Col md={6}>
+                  <Card.Body>
+                    <Skeleton width="60%" height={30} />
+                    <Skeleton count={2} height={20} />
+                  </Card.Body>
+                </Col>
+              </Row>
+            </Card>
           </Col>
         </Row>
       </Container>
@@ -31,7 +53,12 @@ const PostDetails = () => {
     <Container>
       <Row className="mt-3">
         <Col>
-          <h3>Title</h3>
+        <div>
+        <Breadcrumbs />
+        </div>
+        <h1>
+          {post.title}
+          </h1>
           <Card key={post.id}>
             <Row>
               <Col md={6}>
@@ -41,7 +68,7 @@ const PostDetails = () => {
                 <Card.Body>
                   <Card.Title>{post.title}</Card.Title>
                   <Card.Text>{post.description}</Card.Text>
-                  <Card.Text>Author:{post.username}</Card.Text>
+                  <Card.Text>Author: {post.username}</Card.Text>
                 </Card.Body>
               </Col>
             </Row>
