@@ -13,32 +13,40 @@ const Register = () => {
   const [name, setName] = useState("")
   const [username, setUsername] = useState("")
   
-
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    try{
-      await createUserWithEmailAndPassword(auth, email, password)
-      const user = auth.currentUser;
-      console.log(user);
-      if(user){
-        await setDoc(doc(db, "Users", user.uid), {
-          email: user.email,
-          username: username,
-          name: name,
-        });
+    e.preventDefault();
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+  
+      if (!user) {
+        throw new Error("User registration failed.");
       }
-      
-      toast.success("User Registration Success!", {
-        position: "top-right ",
+  
+      console.log("User authenticated:", user.uid);
+  
+      // Firestore document creation
+      await setDoc(doc(db, "Users", user.uid), {
+        email: user.email,
+        username: username.trim(),  // Ensure no accidental spaces
+        name: name.trim(),
       });
-      console.log("User Registration Success!");
-    }catch(error){
-      console.log(error.message);
-      toast.error(error.message, {
-        position: "top-right",
-      });
+
+        // clearing form after registering 
+      setEmail("");
+      setPassword("");
+      setName("");
+      setUsername("");
+
+  
+      toast.success("User Registration Success!", { position: "top-right" });
+      window.location.href ="/login";
+    } catch (error) {
+      console.error("Error:", error.message);
+      toast.error(error.message, { position: "top-right" });
     }
-  }
+  };
+  
 
   return (
     <Container style={registerStyles.Container}>
