@@ -32,7 +32,19 @@ const PostTable = () => {
                                     {post.title}
                                 </Link>
                             </td>
-                            <td style={postTableStyles.thTd}>{post.date || "N/A"}</td>
+                            <td style={postTableStyles.thTd}>
+                                {post.created
+                                    ? new Date(post.created.seconds * 1000).toLocaleString("en-US", {
+                                        year: "numeric",
+                                        month: "long",
+                                        day: "numeric",
+                                        hour: "2-digit",
+                                        minute: "2-digit",
+                                        second: "2-digit",
+                                        timeZoneName: "short",
+                                    })
+                                    : "N/A"}
+                            </td>
                         </tr>
                     ))}
                 </tbody>

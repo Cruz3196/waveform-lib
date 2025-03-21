@@ -69,6 +69,13 @@ const PostDetails = () => {
                   <Card.Title>{post.title}</Card.Title>
                   <Card.Text>{post.description}</Card.Text>
                   <Card.Text>Author: {post.username}</Card.Text>
+                  <Card.Text>Signal added at: <span/>
+                      {post.created ? post.created.toDate().toLocaleString("en-US", { 
+                          year: "numeric", month: "long", day: "numeric", 
+                          hour: "2-digit", minute: "2-digit", second: "2-digit", 
+                          timeZoneName: "short" 
+                      }) : "No date available"}
+                  </Card.Text>
                 </Card.Body>
               </Col>
             </Row>
