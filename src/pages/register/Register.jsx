@@ -40,7 +40,9 @@ const Register = () => {
 
   
       toast.success("User Registration Success!", { position: "top-right" });
+
       window.location.href ="/login";
+      
     } catch (error) {
       console.error("Error:", error.message);
       toast.error(error.message, { position: "top-right" });
