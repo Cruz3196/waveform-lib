@@ -56,7 +56,7 @@ const Hero = () => {
             </Row>
             <Row style={heroStyle.heroInfoContainer}>
                 <Col>
-                    {loading ? <Skeleton count={5} /> : (
+                    {loading ? <Skeleton width={1000} height={40} /> : (
                         'We are dedicated to making this Library even better by adding new features and improving existing ones. However, we need your help to make this happen. You can Buy Us A Coffee to help us enhance the website\'s performance and customer experience. It will allow us to add features that will make your journey with the Library even more enjoyable and productive. Whether you are a frequent user or just stumbled upon our Library, your contribution will make a difference.'
                     )}
                 </Col>
