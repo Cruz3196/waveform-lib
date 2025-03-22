@@ -16,6 +16,8 @@ const ProfileInfo = () => {
             if(docSnap.exists()){
                 setUserDetails(docSnap.data());
                 console.log(docSnap.data()); 
+
+
             }else{
                 console.log("User is not logged in"); 
             }
