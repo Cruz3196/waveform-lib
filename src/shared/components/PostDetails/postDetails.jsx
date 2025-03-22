@@ -5,6 +5,7 @@ import useFetchPosts from "../cards/useFetchPosts";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css"; // Make sure this is included
 import Breadcrumbs from "../breadcrumbs/Breadcrumbs";
+import CardStyles from "../cards/CardStyles";
 
 const PostDetails = () => {
   const { id } = useParams(); 
@@ -59,23 +60,32 @@ const PostDetails = () => {
         <h1>
           {post.title}
           </h1>
-          <Card key={post.id}>
+          <Card key={post.id} style={CardStyles.Cardbody}>
             <Row>
-              <Col md={6}>
-                <Card.Img src={post.imageUrl} alt={post.title} />
+              <Col md={6}  style={CardStyles.ImageColumn}>
+                <Card.Img src={post.imageUrl} alt={post.title} style={CardStyles.CardImage} />
               </Col>
-              <Col md={6}>
+              <Col md={6} style={CardStyles.ContentColumn}>
                 <Card.Body>
-                  <Card.Title>{post.title}</Card.Title>
-                  <Card.Text>{post.description}</Card.Text>
-                  <Card.Text>Author: {post.username}</Card.Text>
-                  <Card.Text>Signal added at: <span/>
-                      {post.created ? post.created.toDate().toLocaleString("en-US", { 
-                          year: "numeric", month: "long", day: "numeric", 
-                          hour: "2-digit", minute: "2-digit", second: "2-digit", 
-                          timeZoneName: "short" 
-                      }) : "No date available"}
-                  </Card.Text>
+                  <Card.Text><strong>Vehicle Model:</strong> {post.vehicleModel}</Card.Text>
+                      <Card.Text><strong>Mileage:</strong> {post.mileage}</Card.Text>
+                      <Card.Text><strong>System:</strong> {post.system}</Card.Text>
+                      <Card.Text><strong>Location:</strong> {post.location}</Card.Text>
+                      <Card.Text><strong>Connector Type:</strong> {post.connectorType}</Card.Text>
+                      <Card.Text>
+                        <strong>Channels:</strong> {post.channels?.ch1}, {post.channels?.ch2}, {post.channels?.ch3}, {post.channels?.ch4}
+                      </Card.Text>
+                      <Card.Text><strong>Details:</strong> {post.details}</Card.Text>
+                      <Card.Subtitle className="mb-2 text-muted">
+                        Posted by: {post.username || "Unknown"}
+                      </Card.Subtitle>
+                      <Card.Text style={CardStyles.DescriptionStyle}>Signal added at: <span/>
+                        {post.created ? post.created.toDate().toLocaleString("en-US", { 
+                            year: "numeric", month: "long", day: "numeric", 
+                            hour: "2-digit", minute: "2-digit", second: "2-digit", 
+                            timeZoneName: "short" 
+                        }) : "No date available"}
+                      </Card.Text>
                 </Card.Body>
               </Col>
             </Row>
