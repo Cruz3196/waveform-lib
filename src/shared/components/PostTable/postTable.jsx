@@ -52,8 +52,8 @@ const PostTable = () => {
                             </tr>
                         ))
                     ) : (
-                        // Show the actual posts when they are loaded
-                        posts.map((post, index) => (
+                        // Show only the first 10 posts when they are loaded
+                        posts.slice(0, 10).map((post, index) => (
                             <tr key={index}>
                                 <td style={postTableStyles.thTd}>{post.username || "Unknown"}</td>
                                 <td style={postTableStyles.thTd}>{post.description}</td>
