@@ -112,7 +112,7 @@ const FormModal = ({ modalOpen, handleModalClose }) => {
             <input type="text" className="form-control" value={connectorType} onChange={(e) => setConnectorType(e.target.value)} />
           </div>
           <div className="mb-3">
-            <label className="form-label">Channels</label>
+            <label className="form-label">Oscilloscope Channels</label>
             <input type="text" className="form-control mb-2" placeholder="Channel 1" value={channels.ch1} onChange={(e) => handleChannelsChange(e, 'ch1')} />
             <input type="text" className="form-control mb-2" placeholder="Channel 2" value={channels.ch2} onChange={(e) => handleChannelsChange(e, 'ch2')} />
             <input type="text" className="form-control mb-2" placeholder="Channel 3" value={channels.ch3} onChange={(e) => handleChannelsChange(e, 'ch3')} />

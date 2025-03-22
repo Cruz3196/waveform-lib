@@ -14,7 +14,7 @@ const CardStyles = {
         marginBottom: "20px",
         backgroundColor: "white",
         overflow: "hidden",
-        height: "450px",
+        height: "470px",
       },
       ImageColumn: {
         display: "flex",
@@ -23,11 +23,10 @@ const CardStyles = {
         padding: "25px",
       },
       CardImage: {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
         height: "400px",  // Set a fixed height to ensure visibility
         padding: "15px",
+        cursor: "pointer",
+        width: "100%", 
       },
       ContentColumn: {
         paddingLeft: "20px", // Added extra padding to push content right

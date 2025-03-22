@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Card, Row, Col, Container, Button } from "react-bootstrap";
+import { Card, Row, Col, Container} from "react-bootstrap";
 import { Link } from "react-router-dom";
 import useFetchPosts from "./useFetchPosts";
 import CardStyles from "./CardStyles";
@@ -51,11 +51,13 @@ const Cards = ({ currentPage, postsPerPage }) => {
                 <Row>
                   <Col md={6} style={CardStyles.ImageColumn}>
                     {post.imageUrl && (
-                      <Card.Img 
-                        src={post.imageUrl} 
-                        alt={post.title} 
-                        style={CardStyles.CardImage} 
-                      />
+                      <Link to={`/post/${post.id}`} style={CardStyles.CardImage} >
+                        <Card.Img 
+                          src={post.imageUrl} 
+                          alt={post.title} 
+                          style={CardStyles.CardImage} 
+                        />
+                      </Link>
                     )}
                   </Col>
                   <Col md={6} style={CardStyles.ContentColumn}>
@@ -65,9 +67,13 @@ const Cards = ({ currentPage, postsPerPage }) => {
                       <Card.Text><strong>System:</strong> {post.system}</Card.Text>
                       <Card.Text><strong>Location:</strong> {post.location}</Card.Text>
                       <Card.Text><strong>Connector Type:</strong> {post.connectorType}</Card.Text>
-                      <Card.Text>
-                        <strong>Channels:</strong> {post.channels?.ch1}, {post.channels?.ch2}, {post.channels?.ch3}, {post.channels?.ch4}
-                      </Card.Text>
+                      <Card.Text><strong>Oscilloscope Channels:</strong></Card.Text>
+                        <ul style={{ paddingLeft: "20px" }}>
+                          {post.channels?.ch1 && <li>Channel 1: {post.channels.ch1}</li>}
+                          {post.channels?.ch2 && <li>Channel 2: {post.channels.ch2}</li>}
+                          {post.channels?.ch3 && <li>Channel 3: {post.channels.ch3}</li>}
+                          {post.channels?.ch4 && <li>Channel 4: {post.channels.ch4}</li>}
+                        </ul>
                       <Card.Text><strong>Details:</strong> {post.details}</Card.Text>
                       <Card.Subtitle className="mb-2 text-muted">
                         Posted by: {post.username || "Unknown"}
@@ -79,11 +85,11 @@ const Cards = ({ currentPage, postsPerPage }) => {
                             timeZoneName: "short" 
                         }) : "No date available"}
                       </Card.Text>
-                      <Button>
+                      {/* <Button>
                         <Link to={`/post/${post.id}`} style={{ textDecoration: "none", color: "inherit" }}>
                           More Details
                         </Link>
-                      </Button>
+                      </Button> */}
                     </Card.Body>
                   </Col>
                 </Row>

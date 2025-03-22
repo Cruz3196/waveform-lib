@@ -6,6 +6,7 @@ import useFetchUserPosts from './useFetchUserPosts'; // Custom hook for fetching
 import { db } from "../../../features/firebase.config";
 import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
+import CardStyles from '../cards/CardStyles';
 import Skeleton from 'react-loading-skeleton'; // Import the Skeleton loader (if not globally imported)
 
 const ProfileWaveForms = () => {
@@ -87,14 +88,14 @@ const ProfileWaveForms = () => {
         {loading ? (
           <Row className="mt-3">
             <Col md={12}>
-              <Card style={ProfileWaveFormStyles.Cardbody}>
+              <Card style={CardStyles.Cardbody}>
                 <Row>
-                  <Col md={6} style={ProfileWaveFormStyles.ImageColumn}>
+                  <Col md={6} style={CardStyles.ImageColumn}>
                     <div style={{ width: "100%", height: "100%" }}>
                       <Skeleton height="100%" width="100%" />
                     </div>
                   </Col>
-                  <Col md={6} style={ProfileWaveFormStyles.ContentColumn}>
+                  <Col md={6} style={CardStyles.ContentColumn}>
                     <Card.Body>
                       <Skeleton width="80%" height={20} />
                       <Skeleton count={2} />
@@ -112,15 +113,36 @@ const ProfileWaveForms = () => {
                 <p>No posts to display.</p>
               ) : (
                 posts.map((post) => (
-                  <Card key={post.id} style={ProfileWaveFormStyles.Cardbody}>
+                  <Card key={post.id} style={CardStyles.Cardbody}>
                     <Row>
-                      <Col md={6} style={ProfileWaveFormStyles.ImageColumn}>
-                        <Card.Img src={post.imageUrl} alt={post.title} style={ProfileWaveFormStyles.CardImage} />
+                      <Col md={6} style={CardStyles.ImageColumn}>
+                        <Card.Img src={post.imageUrl} alt={post.title} style={CardStyles.CardImage} />
                       </Col>
-                      <Col md={6} style={ProfileWaveFormStyles.ContentColumn}>
-                        <Card.Body>
-                          <Card.Title style={ProfileWaveFormStyles.TitleStyle}>{post.title}</Card.Title>
-                          <Card.Text style={ProfileWaveFormStyles.DescriptionStyle}>{post.description}</Card.Text>
+                            <Col md={6} style={CardStyles.ContentColumn}>
+                              <Card.Body>
+                              <Card.Text><strong>Vehicle Model:</strong> {post.vehicleModel}</Card.Text>
+                            <Card.Text><strong>Mileage:</strong> {post.mileage}</Card.Text>
+                            <Card.Text><strong>System:</strong> {post.system}</Card.Text>
+                            <Card.Text><strong>Location:</strong> {post.location}</Card.Text>
+                            <Card.Text><strong>Connector Type:</strong> {post.connectorType}</Card.Text>
+                            <Card.Text><strong>Oscilloscope Channels:</strong></Card.Text>
+                              <ul style={{ paddingLeft: "20px" }}>
+                                {post.channels?.ch1 && <li>Channel 1: {post.channels.ch1}</li>}
+                                {post.channels?.ch2 && <li>Channel 2: {post.channels.ch2}</li>}
+                                {post.channels?.ch3 && <li>Channel 3: {post.channels.ch3}</li>}
+                                {post.channels?.ch4 && <li>Channel 4: {post.channels.ch4}</li>}
+                              </ul>
+                            <Card.Text><strong>Details:</strong> {post.details}</Card.Text>
+                            <Card.Subtitle className="mb-2 text-muted">
+                              Posted by: {post.username || "Unknown"}
+                            </Card.Subtitle>
+                            <Card.Text style={CardStyles.DescriptionStyle}>Signal added at: <span/>
+                              {post.created ? post.created.toDate().toLocaleString("en-US", { 
+                                  year: "numeric", month: "long", day: "numeric", 
+                                  hour: "2-digit", minute: "2-digit", second: "2-digit", 
+                                  timeZoneName: "short" 
+                              }) : "No date available"}
+                            </Card.Text>
                           <Button variant="primary" onClick={() => openEditModal(post)}>
                             Edit
                           </Button>{" "}
