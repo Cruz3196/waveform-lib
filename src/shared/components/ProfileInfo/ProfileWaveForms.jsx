@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Button, Card, Modal, Form } from 'react-bootstrap';
+import { Container, Row, Col, Button, Card } from 'react-bootstrap';
 import ProfileWaveFormStyles from './ProfileWaveFormStyles';
 import FormModal from '../formModel/FormModal'; 
+import EditModal from './Modals/EditModal';  // Import the new EditModal
+import DeleteModal from './Modals/DeleteModal';  // Import the new DeleteModal
 import useFetchUserPosts from './useFetchUserPosts';
-import { db } from "../../../features/firebase.config";
-import { deleteDoc, doc, updateDoc } from "firebase/firestore";
-import { toast } from "react-toastify";
 import Skeleton from 'react-loading-skeleton'; 
 
 const ProfileWaveForms = () => {
   const [loading, setLoading] = useState(true);
-  const [modalOpen, setModalOpen] = useState(false); 
-  const [showEditModal, setShowEditModal] = useState(false); 
-  const [editTitle, setEditTitle] = useState('');
-  const [editDescription, setEditDescription] = useState('');
-  const [editPostId, setEditPostId] = useState('');
+  const [modalOpen, setModalOpen] = useState(false);
+  
+  // Edit modal states
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [postToEdit, setPostToEdit] = useState(null);
+  
+  // Delete modal states
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [postToDelete, setPostToDelete] = useState(null);
   
   const posts = useFetchUserPosts(); // Fetch posts specific to the user
 
@@ -24,36 +27,28 @@ const ProfileWaveForms = () => {
     }, 3000); // Simulate an API call
   }, []);
 
-  // Delete post logic
-  const handleDelete = async (id) => {
-    try {
-      await deleteDoc(doc(db, "posts", id));
-      toast.success("Post deleted successfully!", { position: "top-right" });
-    } catch (error) {
-      toast.error("Error deleting post.", { position: "top-right" });
-    }
-  };
-
   // Open the edit modal
   const openEditModal = (post) => {
-    setEditTitle(post.title);
-    setEditDescription(post.description);
-    setEditPostId(post.id);
+    setPostToEdit(post);
     setShowEditModal(true);
   };
 
-  // Edit post logic
-  const handleEdit = async () => {
-    try {
-      await updateDoc(doc(db, "posts", editPostId), {
-        title: editTitle,
-        description: editDescription,
-      });
-      setShowEditModal(false);
-      toast.success("Post updated successfully!", { position: "top-right" });
-    } catch (error) {
-      toast.error("Error updating post.", { position: "top-right" });
-    }
+  // Close edit modal
+  const handleCloseEditModal = () => {
+    setShowEditModal(false);
+    setPostToEdit(null);
+  };
+
+  // Open the delete modal
+  const openDeleteModal = (post) => {
+    setPostToDelete(post);
+    setShowDeleteModal(true);
+  };
+
+  // Close delete modal
+  const handleCloseDeleteModal = () => {
+    setShowDeleteModal(false);
+    setPostToDelete(null);
   };
 
   return (
@@ -115,37 +110,37 @@ const ProfileWaveForms = () => {
                   <Card key={post.id} style={ProfileWaveFormStyles.Cardbody}>
                     <Row>
                       <Col md={6} style={ProfileWaveFormStyles.ImageColumn}>
-                        <Card.Img src={post.imageUrl} alt={post.title} style={ProfileWaveFormStyles.CardImage} />
+                        <Card.Img src={post.imageUrl} alt={post.vehicleModel} style={ProfileWaveFormStyles.CardImage} />
                       </Col>
-                            <Col md={6} style={ProfileWaveFormStyles.ContentColumn}>
-                              <Card.Body>
-                              <Card.Text><strong>Vehicle Model:</strong> {post.vehicleModel}</Card.Text>
-                            <Card.Text><strong>Mileage:</strong> {post.mileage}</Card.Text>
-                            <Card.Text><strong>System:</strong> {post.system}</Card.Text>
-                            <Card.Text><strong>Location:</strong> {post.location}</Card.Text>
-                            <Card.Text><strong>Connector Type:</strong> {post.connectorType}</Card.Text>
-                            <Card.Text><strong>Oscilloscope Channels:</strong></Card.Text>
-                              <ul style={{ paddingLeft: "20px" }}>
-                                {post.channels?.ch1 && <li>Channel 1: {post.channels.ch1}</li>}
-                                {post.channels?.ch2 && <li>Channel 2: {post.channels.ch2}</li>}
-                                {post.channels?.ch3 && <li>Channel 3: {post.channels.ch3}</li>}
-                                {post.channels?.ch4 && <li>Channel 4: {post.channels.ch4}</li>}
-                              </ul>
-                            <Card.Text><strong>Details:</strong> {post.details}</Card.Text>
-                            <Card.Subtitle className="mb-2 text-muted">
-                              Posted by: {post.username || "Unknown"}
-                            </Card.Subtitle>
-                            <Card.Text style={ProfileWaveFormStyles.DescriptionStyle}>Signal added at: <span/>
-                              {post.created ? post.created.toDate().toLocaleString("en-US", { 
-                                  year: "numeric", month: "long", day: "numeric", 
-                                  hour: "2-digit", minute: "2-digit", second: "2-digit", 
-                                  timeZoneName: "short" 
-                              }) : "No date available"}
-                            </Card.Text>
+                      <Col md={6} style={ProfileWaveFormStyles.ContentColumn}>
+                        <Card.Body>
+                          <Card.Text><strong>Vehicle Model:</strong> {post.vehicleModel}</Card.Text>
+                          <Card.Text><strong>Mileage:</strong> {post.mileage}</Card.Text>
+                          <Card.Text><strong>System:</strong> {post.system}</Card.Text>
+                          <Card.Text><strong>Location:</strong> {post.location}</Card.Text>
+                          <Card.Text><strong>Connector Type:</strong> {post.connectorType}</Card.Text>
+                          <Card.Text><strong>Oscilloscope Channels:</strong></Card.Text>
+                          <ul style={{ paddingLeft: "20px" }}>
+                            {post.channels?.ch1 && <li>Channel 1: {post.channels.ch1}</li>}
+                            {post.channels?.ch2 && <li>Channel 2: {post.channels.ch2}</li>}
+                            {post.channels?.ch3 && <li>Channel 3: {post.channels.ch3}</li>}
+                            {post.channels?.ch4 && <li>Channel 4: {post.channels.ch4}</li>}
+                          </ul>
+                          <Card.Text><strong>Details:</strong> {post.details}</Card.Text>
+                          <Card.Subtitle className="mb-2 text-muted">
+                            Posted by: {post.username || "Unknown"}
+                          </Card.Subtitle>
+                          <Card.Text style={ProfileWaveFormStyles.DescriptionStyle}>Signal added at: <span/>
+                            {post.created ? post.created.toDate().toLocaleString("en-US", { 
+                                year: "numeric", month: "long", day: "numeric", 
+                                hour: "2-digit", minute: "2-digit", second: "2-digit", 
+                                timeZoneName: "short" 
+                            }) : "No date available"}
+                          </Card.Text>
                           <Button variant="primary" onClick={() => openEditModal(post)}>
                             Edit
                           </Button>{" "}
-                          <Button variant="danger" onClick={() => handleDelete(post.id)}>
+                          <Button variant="danger" onClick={() => openDeleteModal(post)}>
                             Delete
                           </Button>
                         </Card.Body>
@@ -162,36 +157,19 @@ const ProfileWaveForms = () => {
       {/* Add Post Modal */}
       <FormModal modalOpen={modalOpen} handleModalClose={() => setModalOpen(false)} />
 
-      {/* Edit Post Modal */}
-      <Modal show={showEditModal} onHide={() => setShowEditModal(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title>Edit Post</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            <Form.Group controlId="editTitle">
-              <Form.Label>Title</Form.Label>
-              <Form.Control
-                type="text"
-                value={editTitle}
-                onChange={(e) => setEditTitle(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group controlId="editDescription">
-              <Form.Label>Description</Form.Label>
-              <Form.Control
-                as="textarea"
-                rows={3}
-                value={editDescription}
-                onChange={(e) => setEditDescription(e.target.value)}
-              />
-            </Form.Group>
-            <Button variant="primary" onClick={handleEdit}>
-              Save Changes
-            </Button>
-          </Form>
-        </Modal.Body>
-      </Modal>
+      {/* Edit Post Modal - Using the separate component */}
+      <EditModal 
+        showEditModal={showEditModal} 
+        handleCloseEditModal={handleCloseEditModal} 
+        postToEdit={postToEdit} 
+      />
+
+      {/* Delete Post Modal - Using the separate component */}
+      <DeleteModal 
+        showDeleteModal={showDeleteModal} 
+        handleCloseDeleteModal={handleCloseDeleteModal} 
+        postToDelete={postToDelete} 
+      />
     </Container>
   );
 };
