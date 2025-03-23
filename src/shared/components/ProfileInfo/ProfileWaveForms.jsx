@@ -2,17 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Button, Card, Modal, Form } from 'react-bootstrap';
 import ProfileWaveFormStyles from './ProfileWaveFormStyles';
 import FormModal from '../formModel/FormModal'; 
-import useFetchUserPosts from './useFetchUserPosts'; // Custom hook for fetching posts
+import useFetchUserPosts from './useFetchUserPosts';
 import { db } from "../../../features/firebase.config";
 import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
-import CardStyles from '../cards/CardStyles';
-import Skeleton from 'react-loading-skeleton'; // Import the Skeleton loader (if not globally imported)
+import Skeleton from 'react-loading-skeleton'; 
 
 const ProfileWaveForms = () => {
   const [loading, setLoading] = useState(true);
-  const [modalOpen, setModalOpen] = useState(false); // Manage modal state for adding a new post
-  const [showEditModal, setShowEditModal] = useState(false); // Manage modal state for editing a post
+  const [modalOpen, setModalOpen] = useState(false); 
+  const [showEditModal, setShowEditModal] = useState(false); 
   const [editTitle, setEditTitle] = useState('');
   const [editDescription, setEditDescription] = useState('');
   const [editPostId, setEditPostId] = useState('');
@@ -88,14 +87,14 @@ const ProfileWaveForms = () => {
         {loading ? (
           <Row className="mt-3">
             <Col md={12}>
-              <Card style={CardStyles.Cardbody}>
+              <Card style={ProfileWaveFormStyles.Cardbody}>
                 <Row>
-                  <Col md={6} style={CardStyles.ImageColumn}>
+                  <Col md={6} style={ProfileWaveFormStyles.ImageColumn}>
                     <div style={{ width: "100%", height: "100%" }}>
                       <Skeleton height="100%" width="100%" />
                     </div>
                   </Col>
-                  <Col md={6} style={CardStyles.ContentColumn}>
+                  <Col md={6} style={ProfileWaveFormStyles.ContentColumn}>
                     <Card.Body>
                       <Skeleton width="80%" height={20} />
                       <Skeleton count={2} />
@@ -113,10 +112,10 @@ const ProfileWaveForms = () => {
                 <p>No posts to display.</p>
               ) : (
                 posts.map((post) => (
-                  <Card key={post.id} style={CardStyles.Cardbody}>
+                  <Card key={post.id} style={ProfileWaveFormStyles.Cardbody}>
                     <Row>
-                      <Col md={6} style={CardStyles.ImageColumn}>
-                        <Card.Img src={post.imageUrl} alt={post.title} style={CardStyles.CardImage} />
+                      <Col md={6} style={ProfileWaveFormStyles.ImageColumn}>
+                        <Card.Img src={post.imageUrl} alt={post.title} style={ProfileWaveFormStyles.CardImage} />
                       </Col>
                             <Col md={6} style={ProfileWaveFormStyles.ContentColumn}>
                               <Card.Body>
@@ -136,7 +135,7 @@ const ProfileWaveForms = () => {
                             <Card.Subtitle className="mb-2 text-muted">
                               Posted by: {post.username || "Unknown"}
                             </Card.Subtitle>
-                            <Card.Text style={CardStyles.DescriptionStyle}>Signal added at: <span/>
+                            <Card.Text style={ProfileWaveFormStyles.DescriptionStyle}>Signal added at: <span/>
                               {post.created ? post.created.toDate().toLocaleString("en-US", { 
                                   year: "numeric", month: "long", day: "numeric", 
                                   hour: "2-digit", minute: "2-digit", second: "2-digit", 

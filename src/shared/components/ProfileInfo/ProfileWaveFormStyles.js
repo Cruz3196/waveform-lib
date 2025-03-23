@@ -1,5 +1,5 @@
 const ProfileWaveFormStyles = {
-    WaveFormContainer: {
+    postDetailsContainer: {
         padding: "20px",
     },
     WaveFormTitleContainer: {
@@ -20,14 +20,6 @@ const ProfileWaveFormStyles = {
         textAlign: "center",
         textTransform: "uppercase"
     },
-    CardContainer: {
-        justifyContent: "center",
-        alignItems: "center",
-        padding: "20px",
-        marginTop: "30px",
-        marginBottom: "30px",
-        backgroundColor: "#f5f5f5",
-    },
     Cardbody: {
         border: "none",
         borderRadius: "8px",
@@ -35,7 +27,7 @@ const ProfileWaveFormStyles = {
         marginBottom: "20px",
         backgroundColor: "white",
         overflow: "hidden",
-        height: "350px"
+        height: "500px"
     },
     ImageColumn: {
         display: "flex",
@@ -47,7 +39,7 @@ const ProfileWaveFormStyles = {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: "300px", // Set a fixed height to ensure visibility
+        height: "450px",
         padding: "15px",
     },
     ContentColumn: {

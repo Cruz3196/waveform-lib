@@ -31,7 +31,7 @@ const Cards = ({ currentPage, postsPerPage }) => {
                 <Row>
                   <Col md={6} style={CardStyles.ImageColumn}>
                     <div style={{ width: "100%", height: "300px" }}>
-                      <Skeleton height="400px" width="100%" />
+                      <Skeleton height="350px" width="100%" />
                     </div>
                   </Col>
                   <Col md={6} style={CardStyles.ContentColumn}>
