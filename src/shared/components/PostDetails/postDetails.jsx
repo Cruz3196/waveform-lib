@@ -58,7 +58,7 @@ const PostDetails = () => {
         <Breadcrumbs />
         </div>
         <h1>
-          {post.title}
+          {post.vehicleModel} <span/> -  {post.system}
           </h1>
           <Card key={post.id} style={CardStyles.Cardbody}>
             <Row>

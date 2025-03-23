@@ -6,8 +6,6 @@ import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { toast } from "react-toastify";
 
 const FormModal = ({ modalOpen, handleModalClose }) => {
-  // const [title, setTitle] = useState("");
-  // const [description, setDescription] = useState("");
   const [img, setImg] = useState(null);
   const [vehicleModel, setVehicleModel] = useState("");
   const [mileage, setMileage] = useState("");
@@ -16,6 +14,7 @@ const FormModal = ({ modalOpen, handleModalClose }) => {
   const [connectorType, setConnectorType] = useState("");
   const [channels, setChannels] = useState({ ch1: "", ch2: "", ch3: "", ch4: "" });
   const [details, setDetails] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false); // Add this to prevent double submissions
 
   const handleImgChange = (e) => setImg(e.target.files[0]);
   const handleChannelsChange = (e, channel) => {
@@ -24,21 +23,27 @@ const FormModal = ({ modalOpen, handleModalClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Prevent double submissions
+    if (isSubmitting) return;
+    setIsSubmitting(true);
   
     if (!img) {
-      toast.error("Please upload an image!", { position: "right" });
+      toast.error("Please upload an image!", { position: "top-right" });
+      setIsSubmitting(false);
       return;
     }
   
     const user = auth.currentUser;
     if (!user) {
       toast.error("You must be logged in to post!", { position: "top-right" });
+      setIsSubmitting(false);
       return;
     }
   
     try {
       const storage = getStorage();
-      const imgRef = ref(storage, `images/${img.name}`);
+      const imgRef = ref(storage, `images/${Date.now()}_${img.name}`);
   
       await uploadBytes(imgRef, img);
       const imgURL = await getDownloadURL(imgRef);
@@ -57,8 +62,6 @@ const FormModal = ({ modalOpen, handleModalClose }) => {
         details
       });
   
-      // setTitle("");
-      // setDescription("");
       setImg(null);
       setVehicleModel("");
       setMileage("");
@@ -75,6 +78,8 @@ const FormModal = ({ modalOpen, handleModalClose }) => {
       toast.error("Error uploading post. Please try again.", {
         position: "top-right",
       });
+    } finally {
+      setIsSubmitting(false);
     }
   };
   
@@ -89,8 +94,8 @@ const FormModal = ({ modalOpen, handleModalClose }) => {
             <label className="form-label">Vehicle Model</label>
             <select className="form-control" value={vehicleModel} onChange={(e) => setVehicleModel(e.target.value)}>
               <option value="">Select a model</option>
-              <option value="Model 1">R1X - Origin (Gen1)</option>
-              <option value="Model 2">R1X - Peregrine(Gen1.6)</option>
+              <option value="R1X - Origin (Gen1)">R1X - Origin (Gen1)</option>
+              <option value="R1X - Peregrine(Gen1.6)">R1X - Peregrine(Gen1.6)</option>
             </select>
           </div>
           <div className="mb-3">
@@ -125,8 +130,10 @@ const FormModal = ({ modalOpen, handleModalClose }) => {
             <input type="file" className="form-control" onChange={handleImgChange} />
           </div>
           <div className="d-flex justify-content-between">
-            <Button variant="primary" type="submit">Submit</Button>
-            <Button variant="danger" onClick={handleModalClose}>Close</Button>
+            <Button variant="primary" type="submit" disabled={isSubmitting}>
+              {isSubmitting ? "Submitting..." : "Submit"}
+            </Button>
+            <Button variant="danger" onClick={handleModalClose} disabled={isSubmitting}>Close</Button>
           </div>
         </form>
       </Modal.Body>
