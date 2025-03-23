@@ -62,7 +62,7 @@ const PostTable = () => {
                                         to={`/post/${post.id}`}
                                         style={{ textDecoration: "none", color: "blue" }}
                                     >
-                                        {post.title}
+                                        {post.vehicleModel} <span/> -  {post.system}
                                     </Link>
                                 </td>
                                 <td style={postTableStyles.thTd}>
