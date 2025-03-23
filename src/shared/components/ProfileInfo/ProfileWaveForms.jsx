@@ -118,7 +118,7 @@ const ProfileWaveForms = () => {
                       <Col md={6} style={CardStyles.ImageColumn}>
                         <Card.Img src={post.imageUrl} alt={post.title} style={CardStyles.CardImage} />
                       </Col>
-                            <Col md={6} style={CardStyles.ContentColumn}>
+                            <Col md={6} style={ProfileWaveFormStyles.ContentColumn}>
                               <Card.Body>
                               <Card.Text><strong>Vehicle Model:</strong> {post.vehicleModel}</Card.Text>
                             <Card.Text><strong>Mileage:</strong> {post.mileage}</Card.Text>

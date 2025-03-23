@@ -6,8 +6,8 @@ import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { toast } from "react-toastify";
 
 const FormModal = ({ modalOpen, handleModalClose }) => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  // const [title, setTitle] = useState("");
+  // const [description, setDescription] = useState("");
   const [img, setImg] = useState(null);
   const [vehicleModel, setVehicleModel] = useState("");
   const [mileage, setMileage] = useState("");
@@ -44,8 +44,6 @@ const FormModal = ({ modalOpen, handleModalClose }) => {
       const imgURL = await getDownloadURL(imgRef);
   
       await addDoc(collection(db, "posts"), {
-        title,
-        description,
         imageUrl: imgURL,
         userId: user.uid,
         username: user.displayName || user.email,
@@ -59,8 +57,8 @@ const FormModal = ({ modalOpen, handleModalClose }) => {
         details
       });
   
-      setTitle("");
-      setDescription("");
+      // setTitle("");
+      // setDescription("");
       setImg(null);
       setVehicleModel("");
       setMileage("");

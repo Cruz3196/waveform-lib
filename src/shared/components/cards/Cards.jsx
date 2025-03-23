@@ -64,7 +64,7 @@ const Cards = ({ currentPage, postsPerPage }) => {
                     <Card.Body>
                       <Card.Text><strong>Vehicle Model:</strong> {post.vehicleModel}</Card.Text>
                       <Card.Text><strong>Mileage:</strong> {post.mileage}</Card.Text>
-                      <Card.Text><strong>System:</strong> {post.system}</Card.Text>
+                      <Card.Text><strong>System signal:</strong> {post.system}</Card.Text>
                       <Card.Text><strong>Location:</strong> {post.location}</Card.Text>
                       <Card.Text><strong>Connector Type:</strong> {post.connectorType}</Card.Text>
                       <Card.Text><strong>Oscilloscope Channels:</strong></Card.Text>
