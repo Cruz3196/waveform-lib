@@ -6,6 +6,7 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css"; // Make sure this is included
 import Breadcrumbs from "../breadcrumbs/Breadcrumbs";
 import CardStyles from "../cards/CardStyles";
+import Comment from "../Comment/Comment";
 
 const PostDetails = () => {
   const { id } = useParams(); 
@@ -94,6 +95,9 @@ const PostDetails = () => {
               </Col>
             </Row>
           </Card>
+
+          {/* Comment Section  */}
+          <Comment/>
         </Col>
       </Row>
     </Container>

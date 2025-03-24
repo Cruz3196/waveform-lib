@@ -154,17 +154,14 @@ const ProfileWaveForms = () => {
         )}
       </>
       
-      {/* Add Post Modal */}
       <FormModal modalOpen={modalOpen} handleModalClose={() => setModalOpen(false)} />
 
-      {/* Edit Post Modal - Using the separate component */}
       <EditModal 
         showEditModal={showEditModal} 
         handleCloseEditModal={handleCloseEditModal} 
         postToEdit={postToEdit} 
       />
 
-      {/* Delete Post Modal - Using the separate component */}
       <DeleteModal 
         showDeleteModal={showDeleteModal} 
         handleCloseDeleteModal={handleCloseDeleteModal} 
