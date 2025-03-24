@@ -15,7 +15,7 @@ const Footer = () => {
                 </Col>
             </Row>
         </Container>
-    )
-}
+    );
+};
 
 export default Footer
