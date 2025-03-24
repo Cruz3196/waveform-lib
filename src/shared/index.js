@@ -7,3 +7,4 @@ export {default as ProfileInfo} from "./components/ProfileInfo/ProfileInfo";
 export {default as ProfileHeader} from "./components/ProfileInfo/ProfileHeader";
 export {default as ProfileWaveform} from "./components/ProfileInfo/ProfileWaveForms";
 export {default as PostDetails} from "./components/PostDetails/postDetails"; 
+export {default as Footer} from "./components/Footer/Footer";
