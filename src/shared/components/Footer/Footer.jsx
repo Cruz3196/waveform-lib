@@ -6,7 +6,7 @@ const Footer = () => {
     return (
         <Container fluid style={FooterStyles.FooterContainer}>
             <Row>
-                <Col>
+                <Col style={FooterStyles.FooterComponents}>
                     <div>
                         <h1>
                             Footer

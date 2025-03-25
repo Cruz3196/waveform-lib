@@ -97,7 +97,7 @@ const PostDetails = () => {
           </Card>
 
           {/* Comment Section  */}
-          <Comment/>
+          <Comment postId={id} />
         </Col>
       </Row>
     </Container>
